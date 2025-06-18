@@ -1,6 +1,8 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
+import { Image } from 'react-native';
 
+const pokeImage: string = '../../assets/images/pokeball.png';
 
 export default function TabLayout() {
   return (
@@ -28,9 +30,7 @@ export default function TabLayout() {
         name='pokedex'
         options={{
           title: '',
-          tabBarIcon: ({ color, size }) => (
-            <FontAwesome name='heart' color={color} size={size} />
-          ),
+          tabBarIcon: () => RenderImage(),
         }}
       />
       <Tabs.Screen
@@ -45,3 +45,13 @@ export default function TabLayout() {
     </Tabs>
   );
 }
+
+const RenderImage = () => {
+  return (
+    // require solo acepta rutas estáticas
+    <Image
+      source={require(pokeImage)}
+      style={{ width: 65, height: 67, top: -21 }}
+    />
+  );
+};
