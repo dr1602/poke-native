@@ -5,15 +5,22 @@ export default function TabLayout() {
   return (
     <Tabs>
       <Tabs.Screen
-        name='favourites'
+        name='index'
         options={{
-          title: 'Favourites',
+          href: null,
         }}
+        redirect={true}
       />
       <Tabs.Screen
         name='pokedex'
         options={{
           title: 'Pokedex',
+        }}
+      />
+      <Tabs.Screen
+        name='favourites'
+        options={{
+          title: 'Favourites',
         }}
       />
       <Tabs.Screen
