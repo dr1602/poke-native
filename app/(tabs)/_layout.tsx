@@ -18,8 +18,8 @@ export default function TabLayout() {
         name='favourites'
         options={{
           title: 'Favourites',
-          tabBarIcon: () => (
-            <FontAwesome name='heart' color={'#fff'} size={18} />
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name='heart' color={color} size={size} />
           ),
         }}
       />
@@ -27,8 +27,8 @@ export default function TabLayout() {
         name='pokedex'
         options={{
           title: 'Pokedex',
-          tabBarIcon: () => (
-            <FontAwesome name='heart' color={'#fff'} size={18} />
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name='heart' color={color} size={size} />
           ),
         }}
       />
@@ -36,6 +36,9 @@ export default function TabLayout() {
         name='account'
         options={{
           title: 'Account',
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name='user' color={color} size={size} />
+          ),
         }}
       />
     </Tabs>
