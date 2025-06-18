@@ -6,9 +6,11 @@ export default function TabLayout() {
     <Tabs>
       <Tabs.Screen
         name='index'
+        // estas options quitan a index del tab navigator
         options={{
           href: null,
         }}
+        // estas options quitan a index del tab navigator y ayuda a redireccionar
         redirect={true}
       />
       <Tabs.Screen
