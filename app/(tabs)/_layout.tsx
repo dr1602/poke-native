@@ -1,5 +1,5 @@
+import { FontAwesome } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
-import React from 'react';
 
 export default function TabLayout() {
   return (
@@ -13,16 +13,23 @@ export default function TabLayout() {
         // estas options quitan a index del tab navigator y ayuda a redireccionar
         redirect={true}
       />
-      <Tabs.Screen
-        name='pokedex'
-        options={{
-          title: 'Pokedex',
-        }}
-      />
+
       <Tabs.Screen
         name='favourites'
         options={{
           title: 'Favourites',
+          tabBarIcon: () => (
+            <FontAwesome name='heart' color={'#fff'} size={18} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name='pokedex'
+        options={{
+          title: 'Pokedex',
+          tabBarIcon: () => (
+            <FontAwesome name='heart' color={'#fff'} size={18} />
+          ),
         }}
       />
       <Tabs.Screen
