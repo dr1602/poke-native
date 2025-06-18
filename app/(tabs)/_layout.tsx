@@ -1,6 +1,7 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 
+
 export default function TabLayout() {
   return (
     <Tabs>
@@ -26,7 +27,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name='pokedex'
         options={{
-          title: 'Pokedex',
+          title: '',
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name='heart' color={color} size={size} />
           ),
