@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native';
 
-const FavouritesScreen = () => {
+const favourites = () => {
   return (
     <View>
       <Text> Favourites </Text>
@@ -8,4 +8,4 @@ const FavouritesScreen = () => {
   );
 };
 
-export default FavouritesScreen;
+export default favourites;
