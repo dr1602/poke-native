@@ -2,10 +2,14 @@ import { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 
 import { getPokeApi, getPokemonDetailsByUrlApi } from '@/chore/api/pokeApi';
-import { PokemonData, PokemonUrlType } from '@/utils/types/PokeTypes';
+import {
+  PokemonData,
+  PokemonFinalData,
+  PokemonUrlType,
+} from '@/utils/types/PokeTypes';
 
 export const Pokedex = () => {
-  const [pokemons, setPokemons] = useState<PokemonData[]>([]);
+  const [pokemons, setPokemons] = useState<PokemonFinalData[]>([]);
 
   console.log('Pokemons --->', pokemons);
   useEffect(() => {
@@ -17,7 +21,7 @@ export const Pokedex = () => {
   const loadPokemons = async () => {
     try {
       const response = await getPokeApi();
-      const pokemonsArray: PokemonData[] = [];
+      const pokemonsArray: PokemonFinalData[] = [];
 
       for await (const pokemon of response.results as PokemonUrlType[]) {
         const pokemonDetails: PokemonData = await getPokemonDetailsByUrlApi(
@@ -30,19 +34,9 @@ export const Pokedex = () => {
         pokemonsArray.push({
           id: pokemonDetails.id,
           name: pokemonDetails.name,
-          types: pokemonDetails.types,
+          types: pokemonDetails.types[0].type.name,
           order: pokemonDetails.order,
-          sprites: {
-            front_default: pokemonDetails.sprites.front_default,
-            other: {
-              home: {
-                front_default:
-                  pokemonDetails.sprites.other?.home?.front_default ?? null,
-                front_shiny:
-                  pokemonDetails.sprites.other?.home?.front_shiny ?? null,
-              },
-            },
-          },
+          image: pokemonDetails.sprites.other['home'].front_default || null,
         });
       }
 

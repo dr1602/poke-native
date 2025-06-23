@@ -14,7 +14,7 @@ interface PokemonType {
 interface PokemonSprites {
   front_default?: string | null;
   other: {
-    home: {
+    ['home']: {
       front_default: string | null;
       front_shiny: string | null;
     };
@@ -27,4 +27,12 @@ export interface PokemonData {
   order: number;
   types: PokemonType[];
   sprites: PokemonSprites;
+}
+
+export interface PokemonFinalData {
+  id: number;
+  name: string;
+  order: number;
+  types: string;
+  image: string | null;
 }
