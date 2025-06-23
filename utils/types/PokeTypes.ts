@@ -11,10 +11,20 @@ interface PokemonType {
   };
 }
 
+interface PokemonSprites {
+  front_default?: string | null;
+  other: {
+    home: {
+      front_default: string | null;
+      front_shiny: string | null;
+    };
+  };
+}
+
 export interface PokemonData {
   id: number;
   name: string;
   order: number;
   types: PokemonType[];
-  sprites: string;
+  sprites: PokemonSprites;
 }

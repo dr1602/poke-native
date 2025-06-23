@@ -30,9 +30,19 @@ export const Pokedex = () => {
         pokemonsArray.push({
           id: pokemonDetails.id,
           name: pokemonDetails.name,
-          type: pokemonDetails.types[0].type.name,
+          types: pokemonDetails.types,
           order: pokemonDetails.order,
-          sprites: pokemonDetails.sprites.other['home'].front_default as String,
+          sprites: {
+            front_default: pokemonDetails.sprites.front_default,
+            other: {
+              home: {
+                front_default:
+                  pokemonDetails.sprites.other?.home?.front_default ?? null,
+                front_shiny:
+                  pokemonDetails.sprites.other?.home?.front_shiny ?? null,
+              },
+            },
+          },
         });
       }
 
