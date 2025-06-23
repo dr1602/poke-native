@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 
 import { getPokeApi, getPokemonDetailsByUrlApi } from '@/chore/api/pokeApi';
-
-
+import { PokemonData, PokemonUrlType } from '@/utils/types/PokeTypes';
 
 export const Pokedex = () => {
   const [pokemons, setPokemons] = useState<PokemonData[]>([]);
@@ -31,9 +30,9 @@ export const Pokedex = () => {
         pokemonsArray.push({
           id: pokemonDetails.id,
           name: pokemonDetails.name,
-          type: pokemonDetails.type[0].type.name,
+          type: pokemonDetails.types[0].type.name,
           order: pokemonDetails.order,
-          sprites: pokemonDetails.sprites.other['home'].front_default,
+          sprites: pokemonDetails.sprites.other['home'].front_default as String,
         });
       }
 
