@@ -3,17 +3,7 @@ import { Text, View } from 'react-native';
 
 import { getPokeApi, getPokemonDetailsByUrlApi } from '@/chore/api/pokeApi';
 
-interface PokemonUrlType {
-  url: string;
-}
 
-interface PokemonData {
-  id: string;
-  name: string;
-  type: any;
-  order?: string;
-  sprites?: any;
-}
 
 export const Pokedex = () => {
   const [pokemons, setPokemons] = useState<PokemonData[]>([]);
