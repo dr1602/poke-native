@@ -14,7 +14,9 @@ const PokemonList: React.FC<PokemonProps> = ({ pokemons }) => {
       numColumns={2}
       showsVerticalScrollIndicator={false}
       keyExtractor={(pokemon) => String(pokemon.id)}
-      renderItem={({ item }) => <Text>{item.name}</Text>}
+      renderItem={({ item }) => (
+        <Text style={styles.PokemonText}>{item.name}</Text>
+      )}
       contentContainerStyle={styles.FlatListContentContainer}
     />
   );
@@ -24,6 +26,9 @@ const styles = StyleSheet.create({
   FlatListContentContainer: {
     paddingHorizontal: 5,
     zIndex: 3,
+  },
+  PokemonText: {
+    color: 'white',
   },
 });
 
