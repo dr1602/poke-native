@@ -1,8 +1,11 @@
+import { Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 const PokemonList = () => {
   return (
-    <>
-      <h1> Pokemon List</h1>
-    </>
+    <SafeAreaView>
+      <Text> Pokemon List</Text>
+    </SafeAreaView>
   );
 };
 

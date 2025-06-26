@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import { getPokeApi, getPokemonDetailsByUrlApi } from '@/chore/api/pokeApi';
+import { PokemonList } from '@/components/Pokemon/PokemonList';
 import {
   PokemonData,
   PokemonFinalData,
@@ -48,7 +49,7 @@ export const Pokedex = () => {
 
   return (
     <View>
-      <Text> Pokedex</Text>
+      <PokemonList />
     </View>
   );
 };
