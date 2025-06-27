@@ -1,9 +1,12 @@
 import { StyleSheet } from 'react-native';
 
-const PokemonCard = () => {
+import { PokemonFinalData } from '@/utils/types/PokeTypes';
+import React from 'react';
+
+const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
   return (
     <>
-      <div style={styles.PokemonText}> This is the pokecard</div>
+      <div style={styles.PokemonText}> {PokemonFinalData.name} </div>
     </>
   );
 };

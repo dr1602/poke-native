@@ -15,7 +15,7 @@ const PokemonList: React.FC<PokemonProps> = ({ pokemons }) => {
       numColumns={2}
       showsVerticalScrollIndicator={false}
       keyExtractor={(pokemon) => String(pokemon.id)}
-      renderItem={({ item }) => <PokemonCard />}
+      renderItem={({ item }) => <PokemonCard {...item} />}
       contentContainerStyle={styles.FlatListContentContainer}
     />
   );
