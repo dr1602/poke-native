@@ -18,8 +18,8 @@ const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
                 style={styles.Image}
               />
             )}
-
             <Text style={styles.PokemonText}>
+              #{`${PokemonFinalData.order}`.padStart(3, '0')} {''}
               {capitalize(PokemonFinalData.name)}
             </Text>
           </View>
