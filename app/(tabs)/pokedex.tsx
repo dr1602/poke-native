@@ -12,7 +12,6 @@ import {
 export const Pokedex = () => {
   const [pokemons, setPokemons] = useState<PokemonFinalData[]>([]);
 
-  console.log('Pokemons --->', pokemons);
   useEffect(() => {
     (async () => {
       await loadPokemons();
