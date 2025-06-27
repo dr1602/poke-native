@@ -34,10 +34,12 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 130,
     width: 130,
+    margin: 3,
   },
   PokemonSecondaryContainer: {
     flex: 1,
     backgroundColor: 'white',
+    borderRadius: 6,
   },
   Spacing: {
     padding: 5,
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
   },
   Image: {
     position: 'absolute',
-    bottom: 33,
+    top: 15,
     right: 39,
     width: 90,
     height: 90,
@@ -59,6 +61,7 @@ const styles = StyleSheet.create({
   },
   Background: {
     backgroundColor: 'gray',
+    borderRadius: 6,
   },
 });
 
