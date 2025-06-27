@@ -32,6 +32,7 @@ export default function TabLayout() {
           headerTitle: 'Pokedex',
           tabBarLabel: '',
           tabBarIcon: () => RenderImage(),
+          headerTransparent: true,
         }}
       />
       <Tabs.Screen
