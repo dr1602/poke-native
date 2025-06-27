@@ -1,5 +1,6 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { capitalize } from '@/utils/Capitalize';
 import { PokemonFinalData } from '@/utils/types/PokeTypes';
 
 const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
@@ -18,7 +19,9 @@ const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
               />
             )}
 
-            <Text style={styles.PokemonText}> {PokemonFinalData.name}</Text>
+            <Text style={styles.PokemonText}>
+              {capitalize(PokemonFinalData.name)}
+            </Text>
           </View>
         </View>
       </View>
