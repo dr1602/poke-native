@@ -49,7 +49,7 @@ export const Pokedex = () => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <PokemonList pokemons={pokemons} />
     </SafeAreaView>
   );
