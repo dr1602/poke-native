@@ -10,7 +10,9 @@ const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
     <Pressable onPress={goToPokemon} style={styles.MainContainer}>
       <View style={styles.PokemonSecondaryContainer}>
         <View style={styles.Spacing}>
-          <Text style={styles.PokemonText}> {PokemonFinalData.name}</Text>
+          <View style={styles.Background}>
+            <Text style={styles.PokemonText}> {PokemonFinalData.name}</Text>
+          </View>
         </View>
       </View>
     </Pressable>
@@ -28,13 +30,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   Spacing: {
-    flex: 1,
     padding: 5,
     justifyContent: 'center',
   },
   PokemonText: {
     color: 'black',
     textAlign: 'center',
+  },
+  Background: {
+    backgroundColor: 'gray',
   },
 });
 
