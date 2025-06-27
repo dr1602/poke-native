@@ -29,7 +29,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name='pokedex'
         options={{
-          title: '',
+          headerTitle: 'Pokedex',
+          tabBarLabel: '',
           tabBarIcon: () => RenderImage(),
         }}
       />
