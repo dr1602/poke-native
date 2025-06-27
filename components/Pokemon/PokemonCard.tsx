@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { capitalize } from '@/utils/Capitalize';
+import { capitalize } from '@/utils/capitalize';
 import { PokemonFinalData } from '@/utils/types/PokeTypes';
 
 const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
