@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { capitalize } from '@/utils/Capitalize';
 import { PokemonFinalData } from '@/utils/types/PokeTypes';
 
 const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
+  const [state, setState] = useState<string>('');
   const goToPokemon = () => {
-    console.log('Veamos al pokemon', PokemonFinalData.name);
+    setState(PokemonFinalData.name);
+    Boolean(state)
   };
   return (
     <Pressable onPress={goToPokemon} style={styles.MainContainer}>
