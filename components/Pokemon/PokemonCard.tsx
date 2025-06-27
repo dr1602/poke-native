@@ -1,13 +1,15 @@
-import { StyleSheet } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
 
 import { PokemonFinalData } from '@/utils/types/PokeTypes';
-import React from 'react';
 
 const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
+  const goToPokemon = () => {
+    console.log('Veamos al pokemon', PokemonFinalData.name);
+  };
   return (
-    <>
-      <div style={styles.PokemonText}> {PokemonFinalData.name} </div>
-    </>
+    <Pressable onPress={goToPokemon}>
+      <Text style={styles.PokemonText}> {PokemonFinalData.name}</Text>
+    </Pressable>
   );
 };
 
