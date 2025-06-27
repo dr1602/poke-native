@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { PokemonFinalData } from '@/utils/types/PokeTypes';
 
@@ -11,6 +11,13 @@ const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
       <View style={styles.PokemonSecondaryContainer}>
         <View style={styles.Spacing}>
           <View style={styles.Background}>
+            {PokemonFinalData.image && (
+              <Image
+                source={{ uri: PokemonFinalData.image }}
+                style={styles.Image}
+              />
+            )}
+
             <Text style={styles.PokemonText}> {PokemonFinalData.name}</Text>
           </View>
         </View>
@@ -33,8 +40,15 @@ const styles = StyleSheet.create({
     padding: 5,
     justifyContent: 'center',
   },
+  Image: {
+    position: 'absolute',
+    bottom: 33,
+    right: 39,
+    width: 90,
+    height: 90,
+  },
   PokemonText: {
-    color: 'black',
+    color: 'white',
     textAlign: 'center',
   },
   Background: {

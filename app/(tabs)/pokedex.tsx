@@ -37,7 +37,8 @@ export const Pokedex = () => {
           name: pokemonDetails.name,
           types: pokemonDetails.types[0].type.name,
           order: pokemonDetails.order,
-          image: pokemonDetails.sprites.other['home'].front_default || null,
+          image:
+            pokemonDetails.sprites.other['home'].front_default || undefined,
         });
       }
 
