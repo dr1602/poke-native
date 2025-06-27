@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   FlatListContentContainer: {
     paddingHorizontal: 5,
     zIndex: 3,
+    justifyContent: 'center',
   },
 });
 
