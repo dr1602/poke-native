@@ -50,6 +50,9 @@ const styles = StyleSheet.create({
   PokemonText: {
     color: 'white',
     textAlign: 'center',
+    fontSize: 15,
+    paddingTop: 1,
+    paddingBottom: 1,
   },
   Background: {
     backgroundColor: 'gray',
