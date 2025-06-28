@@ -1,4 +1,4 @@
-import { API_HOST } from '@/utils/constants/constants';
+import { API_HOST } from '@/utils/constants/apiConstants';
 
 const getPokeApi = async () => {
   try {
