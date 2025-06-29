@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native';
 import { getPokeApi, getPokemonDetailsByUrlApi } from '@/chore/api/pokeApi';
 import { PokemonList } from '@/components/Pokemon/PokemonList';
 import {
+  PokeApiResponseType,
   PokemonData,
   PokemonFinalData,
   PokemonUrlType,
@@ -11,6 +12,7 @@ import {
 
 export const Pokedex = () => {
   const [pokemons, setPokemons] = useState<PokemonFinalData[]>([]);
+  const [nextUrl, setNextUrl] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -20,8 +22,10 @@ export const Pokedex = () => {
 
   const loadPokemons = async () => {
     try {
-      const response = await getPokeApi();
+      const response: PokeApiResponseType = await getPokeApi();
       const pokemonsArray: PokemonFinalData[] = [];
+
+      setNextUrl(response.next);
 
       for await (const pokemon of response.results as PokemonUrlType[]) {
         const pokemonDetails: PokemonData = await getPokemonDetailsByUrlApi(
