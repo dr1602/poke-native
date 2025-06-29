@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { capitalize } from '@/utils/capitalize';
+import { getColourByPokemonType } from '@/utils/getColourByPokemonType';
 import { PokemonFinalData } from '@/utils/types/PokeTypes';
 
 const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
   const [state, setState] = useState<string>('');
 
-  const bgStyles = { backgroundColor: '#f0f', ...styles.Background };
+  const PokemonColour: string = getColourByPokemonType(PokemonFinalData.types);
+  const bgStyles = { backgroundColor: PokemonColour, ...styles.Background };
 
   const goToPokemon = () => {
     setState(PokemonFinalData.name);
