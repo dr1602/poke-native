@@ -18,7 +18,6 @@ const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
   return (
     <Pressable onPress={goToPokemon} style={styles.MainContainer}>
       <View style={styles.PokemonSecondaryContainer}>
-        {/* <View style={styles.Spacing}> */}
         <View style={bgStyles}>
           {PokemonFinalData.image && (
             <Image
@@ -31,7 +30,6 @@ const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
             <strong> {capitalize(PokemonFinalData.name)} </strong>
           </Text>
         </View>
-        {/* </View> */}
       </View>
     </Pressable>
   );
@@ -48,10 +46,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     borderRadius: 6,
-  },
-  Spacing: {
-    padding: 5,
-    justifyContent: 'center',
   },
   Image: {
     position: 'absolute',
