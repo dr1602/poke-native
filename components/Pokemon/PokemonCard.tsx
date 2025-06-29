@@ -6,27 +6,30 @@ import { PokemonFinalData } from '@/utils/types/PokeTypes';
 
 const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
   const [state, setState] = useState<string>('');
+
+  const bgStyles = { backgroundColor: '#f0f', ...styles.Background };
+
   const goToPokemon = () => {
     setState(PokemonFinalData.name);
-    Boolean(state)
+    Boolean(state);
   };
   return (
     <Pressable onPress={goToPokemon} style={styles.MainContainer}>
       <View style={styles.PokemonSecondaryContainer}>
-        <View style={styles.Spacing}>
-          <View style={styles.Background}>
-            {PokemonFinalData.image && (
-              <Image
-                source={{ uri: PokemonFinalData.image }}
-                style={styles.Image}
-              />
-            )}
-            <Text style={styles.PokemonText}>
-              #{`${PokemonFinalData.order}`.padStart(3, '0')} {''}
-              {capitalize(PokemonFinalData.name)}
-            </Text>
-          </View>
+        {/* <View style={styles.Spacing}> */}
+        <View style={bgStyles}>
+          {PokemonFinalData.image && (
+            <Image
+              source={{ uri: PokemonFinalData.image }}
+              style={styles.Image}
+            />
+          )}
+          <Text style={styles.PokemonText}>
+            #{`${PokemonFinalData.order}`.padStart(3, '0')} {''}
+            {capitalize(PokemonFinalData.name)}
+          </Text>
         </View>
+        {/* </View> */}
       </View>
     </Pressable>
   );
@@ -63,8 +66,10 @@ const styles = StyleSheet.create({
     paddingBottom: 1,
   },
   Background: {
-    backgroundColor: 'gray',
+    flex: 1,
     borderRadius: 6,
+    padding: 10,
+    justifyContent: 'center',
   },
 });
 
