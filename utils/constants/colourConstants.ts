@@ -1,4 +1,6 @@
-export const POKEMON_TYPE_COLORS = {
+import { PokemonTypeColors } from '@/utils/types/ColourTypesTypes';
+
+export const POKEMON_TYPE_COLORS: PokemonTypeColors = {
   normal: '#A8A878',
   fighting: '#C03028',
   flying: '#A890F0',
