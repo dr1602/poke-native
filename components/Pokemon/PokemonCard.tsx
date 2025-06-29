@@ -28,7 +28,7 @@ const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
           )}
           <Text style={styles.PokemonText}>
             #{`${PokemonFinalData.order}`.padStart(3, '0')} {''}
-            {capitalize(PokemonFinalData.name)}
+            <strong> {capitalize(PokemonFinalData.name)} </strong>
           </Text>
         </View>
         {/* </View> */}
@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
   },
   Image: {
     position: 'absolute',
-    top: 15,
-    right: 39,
+    top: 6,
+    right: 51,
     width: 90,
     height: 90,
   },
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 15,
-    paddingTop: 1,
+    paddingTop: 96,
     paddingBottom: 1,
   },
   Background: {
