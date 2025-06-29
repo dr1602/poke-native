@@ -28,9 +28,6 @@ export const Pokedex = () => {
           pokemon.url
         );
 
-        console.log(pokemon.url);
-        console.log(pokemonDetails);
-
         pokemonsArray.push({
           id: pokemonDetails.id,
           name: pokemonDetails.name,
