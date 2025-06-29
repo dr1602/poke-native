@@ -1,15 +1,14 @@
 import { ActivityIndicator, FlatList, StyleSheet } from 'react-native';
 
-import { PokemonFinalData } from '@/utils/types/PokeTypes';
+import { PokemonListDataAndActions } from '@/utils/types/PokeTypes';
 import { PokemonCard } from './PokemonCard';
 
-interface PokemonProps {
-  pokemons: PokemonFinalData[];
-}
-
-const PokemonList: React.FC<PokemonProps> = ({ pokemons }) => {
+const PokemonList: React.FC<PokemonListDataAndActions> = ({
+  pokemons,
+  onLoad,
+}) => {
   const LoadMorePokemons = () => {
-    console.log('Cargando mas pokemons...');
+    onLoad();
   };
 
   return (
