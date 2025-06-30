@@ -1,5 +1,3 @@
-
-
 interface PokemonType {
   slot: number;
   type: {
@@ -40,6 +38,7 @@ interface PokemonProps {
 
 export interface PokemonCardActions {
   onLoad: VoidFunction;
+  isThereNext: string;
 }
 
 export type PokemonCardDataAndActions = PokemonFinalData & PokemonCardActions;
