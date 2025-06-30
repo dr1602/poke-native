@@ -20,10 +20,12 @@ const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
       <View style={styles.PokemonSecondaryContainer}>
         <View style={bgStyles}>
           {PokemonFinalData.image && (
-            <Image
-              source={{ uri: PokemonFinalData.image }}
-              style={styles.Image}
-            />
+            <View style={styles.ImageWrapper}>
+              <Image
+                source={{ uri: PokemonFinalData.image }}
+                style={styles.Image}
+              />
+            </View>
           )}
           <Text style={styles.PokemonText}>
             #{`${PokemonFinalData.order}`.padStart(3, '0')} {''}
@@ -47,10 +49,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 6,
   },
+  ImageWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   Image: {
-    position: 'absolute',
-    top: 6,
-    right: 51,
+    marginTop: 81,
     width: 90,
     height: 90,
   },
