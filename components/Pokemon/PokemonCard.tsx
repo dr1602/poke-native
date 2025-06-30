@@ -18,20 +18,20 @@ const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
   return (
     <Pressable onPress={goToPokemon} style={styles.MainContainer}>
       <View style={styles.PokemonSecondaryContainer}>
-        {/* <View style={styles.Spacing}> */}
         <View style={bgStyles}>
           {PokemonFinalData.image && (
-            <Image
-              source={{ uri: PokemonFinalData.image }}
-              style={styles.Image}
-            />
+            <View style={styles.ImageWrapper}>
+              <Image
+                source={{ uri: PokemonFinalData.image }}
+                style={styles.Image}
+              />
+            </View>
           )}
           <Text style={styles.PokemonText}>
             #{`${PokemonFinalData.order}`.padStart(3, '0')} {''}
-            {capitalize(PokemonFinalData.name)}
+            <strong> {capitalize(PokemonFinalData.name)} </strong>
           </Text>
         </View>
-        {/* </View> */}
       </View>
     </Pressable>
   );
@@ -49,14 +49,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 6,
   },
-  Spacing: {
-    padding: 5,
+  ImageWrapper: {
+    flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   Image: {
-    position: 'absolute',
-    top: 15,
-    right: 39,
+    marginTop: 81,
     width: 90,
     height: 90,
   },
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 15,
-    paddingTop: 1,
+    paddingTop: 96,
     paddingBottom: 1,
   },
   Background: {

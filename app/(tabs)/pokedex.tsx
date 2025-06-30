@@ -3,14 +3,12 @@ import { SafeAreaView } from 'react-native';
 
 import { getPokeApi, getPokemonDetailsByUrlApi } from '@/chore/api/pokeApi';
 import { PokemonList } from '@/components/Pokemon/PokemonList';
-import {
-  PokemonData,
-  PokemonFinalData,
-  PokemonUrlType,
-} from '@/utils/types/PokeTypes';
+import { PokeApiResponseType, PokemonUrlType } from '@/utils/types/ApiTypes';
+import { PokemonData, PokemonFinalData } from '@/utils/types/PokeTypes';
 
 export const Pokedex = () => {
   const [pokemons, setPokemons] = useState<PokemonFinalData[]>([]);
+  const [nextUrl, setNextUrl] = useState<string>('');
 
   useEffect(() => {
     (async () => {
@@ -20,16 +18,15 @@ export const Pokedex = () => {
 
   const loadPokemons = async () => {
     try {
-      const response = await getPokeApi();
+      const response: PokeApiResponseType = await getPokeApi(nextUrl);
       const pokemonsArray: PokemonFinalData[] = [];
+
+      setNextUrl(response.next);
 
       for await (const pokemon of response.results as PokemonUrlType[]) {
         const pokemonDetails: PokemonData = await getPokemonDetailsByUrlApi(
           pokemon.url
         );
-
-        console.log(pokemon.url);
-        console.log(pokemonDetails);
 
         pokemonsArray.push({
           id: pokemonDetails.id,
@@ -49,7 +46,7 @@ export const Pokedex = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <PokemonList pokemons={pokemons} />
+      <PokemonList pokemons={pokemons} onLoad={loadPokemons} />
     </SafeAreaView>
   );
 };
