@@ -8,7 +8,7 @@ import { PokemonData, PokemonFinalData } from '@/utils/types/PokeTypes';
 
 export const Pokedex = () => {
   const [pokemons, setPokemons] = useState<PokemonFinalData[]>([]);
-  const [nextUrl, setNextUrl] = useState<string | null>(null);
+  const [nextUrl, setNextUrl] = useState<string>('');
 
   useEffect(() => {
     (async () => {
