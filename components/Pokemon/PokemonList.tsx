@@ -6,6 +6,7 @@ import { PokemonCard } from './PokemonCard';
 const PokemonList: React.FC<PokemonListDataAndActions> = ({
   pokemons,
   onLoad,
+  isThereNext,
 }) => {
   const LoadMorePokemons = () => {
     onLoad();
@@ -19,14 +20,18 @@ const PokemonList: React.FC<PokemonListDataAndActions> = ({
       keyExtractor={(pokemon) => String(pokemon.id)}
       renderItem={({ item }) => <PokemonCard {...item} />}
       contentContainerStyle={styles.FlatListContentContainer}
-      onEndReached={LoadMorePokemons}
+      onEndReached={!!isThereNext ? LoadMorePokemons : null}
       onEndReachedThreshold={0.15}
       ListFooterComponent={
-        <ActivityIndicator
-          size='small'
-          style={styles.Spinner}
-          color={'#DF0026'}
-        />
+        !!isThereNext ? (
+          <ActivityIndicator
+            size='small'
+            style={styles.Spinner}
+            color={'#DF0026'}
+          />
+        ) : (
+          <></>
+        )
       }
     />
   );

@@ -46,7 +46,11 @@ export const Pokedex = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <PokemonList pokemons={pokemons} onLoad={loadPokemons} />
+      <PokemonList
+        pokemons={pokemons}
+        onLoad={loadPokemons}
+        isThereNext={nextUrl}
+      />
     </SafeAreaView>
   );
 };
