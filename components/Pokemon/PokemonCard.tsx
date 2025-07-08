@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRouter } from 'expo-router';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { capitalize } from '@/utils/capitalize';
@@ -6,14 +6,19 @@ import { getColourByPokemonType } from '@/utils/getColourByPokemonType';
 import { PokemonFinalData } from '@/utils/types/PokeTypes';
 
 const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
-  const [state, setState] = useState<string>('');
+  const router = useRouter();
 
   const PokemonColour: string = getColourByPokemonType(PokemonFinalData.types);
   const bgStyles = { backgroundColor: PokemonColour, ...styles.Background };
 
   const goToPokemon = () => {
-    setState(PokemonFinalData.name);
-    Boolean(state);
+    router.push({
+      pathname: '/pokemon',
+      params: {
+        id: PokemonFinalData.id,
+        name: PokemonFinalData.name,
+      },
+    });
   };
   return (
     <Pressable onPress={goToPokemon} style={styles.MainContainer}>
