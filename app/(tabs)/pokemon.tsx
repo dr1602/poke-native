@@ -1,9 +1,11 @@
 import { Text, View } from 'react-native';
 
-export const Pokemon = () => {
+const Pokemon = () => {
   return (
     <View>
       <Text> Estamos en un Pokemon</Text>
     </View>
   );
 };
+
+export default Pokemon;
