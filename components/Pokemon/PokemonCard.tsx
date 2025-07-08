@@ -12,11 +12,11 @@ const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
   const bgStyles = { backgroundColor: PokemonColour, ...styles.Background };
 
   const goToPokemon = () => {
+    const pokemonDataString = JSON.stringify(PokemonFinalData);
     router.push({
       pathname: '/pokemon',
       params: {
-        id: PokemonFinalData.id,
-        name: PokemonFinalData.name,
+        PokemonFinalData: pokemonDataString,
       },
     });
   };
