@@ -21,7 +21,6 @@ const Pokemon = () => {
     return (
       <View>
         <Text style={styles.errorText}>
-          {' '}
           Cargando o no se encontró la información del Pokémon.
         </Text>
       </View>
@@ -49,6 +48,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   errorText: {
+    paddingHorizontal: 18,
     color: 'red',
     fontSize: 18,
     textAlign: 'center',
