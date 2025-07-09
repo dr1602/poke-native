@@ -49,6 +49,7 @@ export default function TabLayout() {
         options={{
           title: 'Detalle de Pokemón',
           href: null,
+          headerShown: true,
         }}
       />
     </Tabs>
