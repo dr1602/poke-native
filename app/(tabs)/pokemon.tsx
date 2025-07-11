@@ -1,6 +1,7 @@
 import { useLocalSearchParams } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
+import { Header } from '@/components/Pokemon/IndividualPokemon/Header';
 import { PokemonFinalData } from '@/utils/types/PokeTypes';
 
 const Pokemon = () => {
@@ -30,13 +31,11 @@ const Pokemon = () => {
   const { id, name, types, order, image } = pokemonData;
 
   return (
-    <View>
-      <Text style={styles.PokemonName}> Estamos en el Pokemon: {name}</Text>
-      <Text style={styles.PokemonId}> El ID del Pokemon: {id}</Text>
-      <Text style={styles.PokemonId}> El Typo del Pokemon: {types}</Text>
-      <Text style={styles.PokemonId}> El Orden del Pokemon: {order}</Text>
-      <Text style={styles.PokemonId}> La imagen del Pokemon: {image}</Text>
-    </View>
+    <ScrollView>
+      <Header 
+        PokemonData={pokemonData}
+      />
+    </ScrollView>
   );
 };
 
