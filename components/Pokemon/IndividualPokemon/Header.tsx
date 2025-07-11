@@ -1,8 +1,7 @@
-import { View } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, View } from 'react-native';
 
 import { getColourByPokemonType } from '@/utils/getColourByPokemonType';
 import { PokemonFinalData } from '@/utils/types/PokeTypes';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface PokemonDataProps {
   PokemonData: PokemonFinalData;
@@ -14,7 +13,27 @@ export const Header = ({ PokemonData }: PokemonDataProps) => {
 
   return (
     <View>
-      <SafeAreaView></SafeAreaView>
+      <SafeAreaView>
+        <View style={styles.imageContainer}>
+          <Image source={{ uri: PokemonData.image }} style={styles.image} />
+        </View>
+      </SafeAreaView>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center',
+    top: 30,
+    paddingLeft: 69,
+    paddingRight: 69,
+  },
+  image: {
+    width: 250,
+    height: 250,
+    resizeMode: 'contain',
+  },
+});
