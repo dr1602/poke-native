@@ -32,9 +32,7 @@ const Pokemon = () => {
 
   return (
     <ScrollView>
-      <Header 
-        PokemonData={pokemonData}
-      />
+      <Header PokemonData={pokemonData} />
     </ScrollView>
   );
 };
