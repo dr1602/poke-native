@@ -5,7 +5,9 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
 import { PokemonListDataAndActions } from '@/utils/types/PokeTypes';
+import { useEffect } from 'react';
 import { PokemonCard } from './PokemonCard';
 
 const PokemonList: React.FC<PokemonListDataAndActions> = ({
@@ -13,9 +15,19 @@ const PokemonList: React.FC<PokemonListDataAndActions> = ({
   onLoad,
   isThereNext,
 }) => {
+  const { clearPokemonData } = usePokemonDetailStore();
+
   const LoadMorePokemons = () => {
     onLoad();
   };
+
+  useEffect(() => {
+    clearPokemonData();
+
+    return () => {
+      clearPokemonData();
+    };
+  }, [clearPokemonData]);
 
   return (
     <FlatList
