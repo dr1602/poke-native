@@ -20,7 +20,10 @@ export const Header = ({ PokemonData }: PokemonDataProps) => {
           <Image source={{ uri: PokemonData.image }} style={styles.image} />
         </View>
         <View style={styles.header}>
-          <Text style={styles.name}> {capitalize(PokemonData.name)} </Text>
+          <Text style={styles.name}>
+            #{`${PokemonData.order}`.padStart(3, '0')}
+            <strong> {capitalize(PokemonData.name)} </strong>
+          </Text>
         </View>
       </SafeAreaView>
     </>
@@ -31,7 +34,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     marginHorizontal: 20,
-    marginTop: 39,
+    marginTop: 30,
   },
   imageContainer: {
     flex: 1,
@@ -52,12 +55,11 @@ const styles = StyleSheet.create({
   },
   name: {
     color: '#fff',
-    fontWeight: 'bold',
     fontSize: 21,
   },
   Background: {
     width: '100%',
-    height: 375,
+    height: 354,
     justifyContent: 'center',
     position: 'absolute',
     borderBottomEndRadius: 690,
