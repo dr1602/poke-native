@@ -24,12 +24,29 @@ export interface PokemonData {
   sprites: PokemonSprites;
 }
 
+interface PokemonCries {
+  latest: string;
+  legacy: string;
+}
+
+export interface PokemonExtendedData extends PokemonData {
+  height: number;
+  weight: number;
+  cries?: PokemonCries;
+}
+
 export interface PokemonFinalData {
   id: number;
   name: string;
   order: number;
   types: string;
   image: string | undefined;
+}
+
+export interface PokemonFinalExtendedData extends PokemonFinalData {
+  height: number;
+  weight: number;
+  cries?: string;
 }
 
 interface PokemonProps {

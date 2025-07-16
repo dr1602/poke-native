@@ -1,9 +1,9 @@
-import { PokemonFinalData } from '@/utils/types/PokeTypes';
+import { PokemonFinalExtendedData } from '@/utils/types/PokeTypes';
 import { create } from 'zustand';
 
 interface PokemonDetailState {
-  currentPokemonData: PokemonFinalData | null;
-  setPokemonData: (data: PokemonFinalData) => void;
+  currentPokemonData: PokemonFinalExtendedData | null;
+  setPokemonData: (data: PokemonFinalExtendedData) => void;
   clearPokemonData: () => void;
 }
 

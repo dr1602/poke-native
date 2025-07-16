@@ -1,24 +1,21 @@
 import { useRouter } from 'expo-router';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
 import { capitalize } from '@/utils/capitalize';
 import { getColourByPokemonType } from '@/utils/getColourByPokemonType';
 import { PokemonFinalData } from '@/utils/types/PokeTypes';
 
 const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
   const router = useRouter();
-  const setPokemonData = usePokemonDetailStore((state) => state.setPokemonData);
 
   const PokemonColour: string = getColourByPokemonType(PokemonFinalData.types);
   const bgStyles = { backgroundColor: PokemonColour, ...styles.Background };
 
   const goToPokemon = () => {
-    setPokemonData(PokemonFinalData);
     router.push({
       pathname: '/pokemon/[id]',
       params: {
-        id: PokemonFinalData.id.toString(),
+        id: PokemonFinalData.order.toString(),
       },
     });
   };
