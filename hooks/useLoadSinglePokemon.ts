@@ -55,8 +55,6 @@ export const useLoadSinglePokemon = (id: string) => {
     [currentPokemonData, loading, setPokemonData, clearPokemonData, setError]
   );
 
-  console.log(loading, error, currentPokemonData);
-
   useEffect(() => {
     loadSinglePokemon(id);
   }, [id, loadSinglePokemon, clearPokemonData]);
