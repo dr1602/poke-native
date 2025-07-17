@@ -1,26 +1,31 @@
+import { useSearchParams } from 'expo-router/build/hooks';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { Header } from '@/components/Pokemon/IndividualPokemon/Header';
+import { useLoadSinglePokemon } from '@/hooks/useLoadSinglePokemon';
 import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
-import { PokemonFinalData } from '@/utils/types/PokeTypes';
 
 const Pokemon = () => {
-  const { currentPokemonData } = usePokemonDetailStore();
-  let pokemonData: PokemonFinalData | undefined;
+  const params = useSearchParams();
+  const idValue = params.get('id');
+  const { loading, error } = useLoadSinglePokemon(idValue as string);
+  const pokemonData = usePokemonDetailStore(
+    (state) => state.currentPokemonData
+  );
 
-  if (!!currentPokemonData) {
-    try {
-      pokemonData = currentPokemonData;
-    } catch (e) {
-      console.error('Error al parsear los detalles del Pokemon:', e);
-    }
+  if (loading) {
+    return (
+      <View>
+        <Text style={styles.loadingText}>Cargando Pokémon...</Text>
+      </View>
+    );
   }
 
-  if (!pokemonData) {
+  if (error || !pokemonData) {
     return (
       <View>
         <Text style={styles.errorText}>
-          Cargando o no se encontró la información del Pokémon.
+          {error || 'No se pudo cargar la información del Pokémon.'}
         </Text>
       </View>
     );
@@ -28,7 +33,7 @@ const Pokemon = () => {
 
   return (
     <ScrollView>
-      <Header PokemonData={pokemonData} />
+      <Header />
     </ScrollView>
   );
 };
@@ -39,6 +44,12 @@ const styles = StyleSheet.create({
   },
   PokemonId: {
     color: 'white',
+  },
+  loadingText: {
+    paddingHorizontal: 18,
+    color: 'white',
+    fontSize: 18,
+    textAlign: 'center',
   },
   errorText: {
     paddingHorizontal: 18,

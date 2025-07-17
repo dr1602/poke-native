@@ -1,15 +1,15 @@
 import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
+import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
 import { capitalize } from '@/utils/capitalize';
 import { getColourByPokemonType } from '@/utils/getColourByPokemonType';
-import { PokemonFinalData } from '@/utils/types/PokeTypes';
 
-interface PokemonDataProps {
-  PokemonData: PokemonFinalData;
-}
+export const Header = () => {
+  const { currentPokemonData } = usePokemonDetailStore();
 
-export const Header = ({ PokemonData }: PokemonDataProps) => {
-  const PokemonColour: string = getColourByPokemonType(PokemonData.types);
+  const PokemonColour: string = getColourByPokemonType(
+    currentPokemonData?.types || ''
+  );
   const bgStyles = { backgroundColor: PokemonColour, ...styles.Background };
 
   return (
@@ -17,12 +17,15 @@ export const Header = ({ PokemonData }: PokemonDataProps) => {
       <View style={bgStyles} />
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.imageContainer}>
-          <Image source={{ uri: PokemonData.image }} style={styles.image} />
+          <Image
+            source={{ uri: currentPokemonData?.image }}
+            style={styles.image}
+          />
         </View>
         <View style={styles.header}>
           <Text style={styles.name}>
-            #{`${PokemonData.order}`.padStart(3, '0')}
-            <strong> {capitalize(PokemonData.name)} </strong>
+            #{`${currentPokemonData?.order}`.padStart(3, '0')}
+            <strong> {capitalize(currentPokemonData?.name || '')} </strong>
           </Text>
         </View>
       </SafeAreaView>
