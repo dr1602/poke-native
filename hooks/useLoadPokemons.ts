@@ -28,7 +28,11 @@ export const useLoadPokemons = () => {
           pokemon.url
         );
 
+        const parts = pokemon.url.split('/');
+        const numberId = parts[parts.length - 2];
+
         pokemonsArray.push({
+          number: !!numberId ? numberId : '',
           id: pokemonDetails.id,
           name: pokemonDetails.name,
           types: pokemonDetails.types[0].type.name,

@@ -15,7 +15,7 @@ const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
     router.push({
       pathname: '/pokemon/[id]',
       params: {
-        id: PokemonFinalData.order.toString(),
+        id: PokemonFinalData?.number ?? '',
       },
     });
   };

@@ -36,6 +36,7 @@ export interface PokemonExtendedData extends PokemonData {
 }
 
 export interface PokemonFinalData {
+  number?: string;
   id: number;
   name: string;
   order: number;
