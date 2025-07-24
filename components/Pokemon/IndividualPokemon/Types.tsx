@@ -5,19 +5,17 @@ import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
 export const Types = () => {
   const { currentPokemonData } = usePokemonDetailStore();
 
-  console.log(currentPokemonData);
   return (
     <>
       <View style={styles.content}>
-        <Text style={styles.text}>
-          {/* {
-          Array(currentPokemonData?.types).map((item) => {
-            <View>
-              
-            </View>
-          })
-          }  */}
-        </Text>
+        {currentPokemonData?.types &&
+          currentPokemonData?.types.map((item) => {
+            return (
+              <View key={item} style={styles.pill}>
+                <Text style={styles.text}>{item}</Text>
+              </View>
+            );
+          })}
       </View>
     </>
   );
@@ -27,6 +25,16 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 20,
     marginTop: 21,
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  pill: {
+    paddingHorizontal: 20,
+    paddingVertical: 3,
+    borderRadius: 18,
+    marginHorizontal: 6,
+    backgroundColor: 'red',
   },
   text: {
     color: '#fff',
