@@ -8,7 +8,7 @@ export const Header = () => {
   const { currentPokemonData } = usePokemonDetailStore();
 
   const PokemonColour: string = getColourByPokemonType(
-    currentPokemonData?.types || ''
+    currentPokemonData?.types[0] || ''
   );
   const bgStyles = { backgroundColor: PokemonColour, ...styles.Background };
 

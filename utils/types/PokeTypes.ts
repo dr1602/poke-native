@@ -40,7 +40,7 @@ export interface PokemonFinalData {
   id: number;
   name: string;
   order: number;
-  types: string;
+  types: string[];
   image: string | undefined;
 }
 

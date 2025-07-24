@@ -35,7 +35,7 @@ export const useLoadSinglePokemon = (id: string) => {
         let pokemonsArray: PokemonFinalExtendedData = {
           id: response.id,
           name: response.name,
-          types: response.types[0].type.name,
+          types: response.types.map((typeInfo) => typeInfo.type.name),
           order: response.order,
           image: response.sprites.other['home'].front_default || undefined,
           height: response.height,

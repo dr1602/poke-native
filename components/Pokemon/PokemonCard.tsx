@@ -8,7 +8,9 @@ import { PokemonFinalData } from '@/utils/types/PokeTypes';
 const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
   const router = useRouter();
 
-  const PokemonColour: string = getColourByPokemonType(PokemonFinalData.types);
+  const PokemonColour: string = getColourByPokemonType(
+    String(PokemonFinalData.types)
+  );
   const bgStyles = { backgroundColor: PokemonColour, ...styles.Background };
 
   const goToPokemon = () => {
