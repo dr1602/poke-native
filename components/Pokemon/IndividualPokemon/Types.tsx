@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 
 import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
+import { capitalize } from '@/utils/capitalize';
+import { getColourByPokemonType } from '@/utils/getColourByPokemonType';
 
 export const Types = () => {
   const { currentPokemonData } = usePokemonDetailStore();
@@ -11,8 +13,14 @@ export const Types = () => {
         {currentPokemonData?.types &&
           currentPokemonData?.types.map((item) => {
             return (
-              <View key={item} style={styles.pill}>
-                <Text style={styles.text}>{item}</Text>
+              <View
+                key={item}
+                style={{
+                  ...styles.pill,
+                  backgroundColor: getColourByPokemonType(item),
+                }}
+              >
+                <Text style={styles.text}>{capitalize(item)}</Text>
               </View>
             );
           })}
@@ -34,7 +42,6 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     borderRadius: 18,
     marginHorizontal: 6,
-    backgroundColor: 'red',
   },
   text: {
     color: '#fff',
