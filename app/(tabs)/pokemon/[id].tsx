@@ -2,6 +2,7 @@ import { useSearchParams } from 'expo-router/build/hooks';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { Header } from '@/components/Pokemon/IndividualPokemon/Header';
+import { Types } from '@/components/Pokemon/IndividualPokemon/Types';
 import { useLoadSinglePokemon } from '@/hooks/useLoadSinglePokemon';
 import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
 
@@ -34,6 +35,7 @@ const Pokemon = () => {
   return (
     <ScrollView>
       <Header />
+      <Types />
     </ScrollView>
   );
 };
