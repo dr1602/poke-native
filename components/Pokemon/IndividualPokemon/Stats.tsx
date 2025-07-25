@@ -8,7 +8,13 @@ export const Stats = () => {
 
   const barStyles = (statNumber: number) => {
     const color =
-      statNumber > 69 ? '#02AC66' : statNumber > 33 ? '#024A86' : '#EF280F';
+      statNumber > 100
+        ? '#E7D40A'
+        : statNumber > 69
+        ? '#02AC66'
+        : statNumber > 33
+        ? '#024A86'
+        : '#EF280F';
 
     return {
       backgroundColor: color,
