@@ -12,9 +12,12 @@ export const Stats = () => {
         return (
           <View key={item.stat.name} style={styles.block}>
             <View style={styles.blockTitle}>
-              <Text style={styles.text}> {capitalize(item.stat.name)} </Text>
+              <Text style={styles.statName}>{capitalize(item.stat.name)}</Text>
             </View>
-            <Text style={styles.text}>BARRA</Text>
+            <View style={styles.blockInfo}>
+              <Text style={styles.number}>{item.base_stat}</Text>
+              <View style={styles.backgroundBar}></View>
+            </View>
           </View>
         );
       })}
@@ -35,7 +38,19 @@ const styles = StyleSheet.create({
   blockTitle: {
     width: '30%',
   },
-  text: {
+  statName: {
     color: '#fff',
+    fontSize: 12,
   },
+  blockInfo: {
+    width: '70%',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  number: {
+    color: '#fff',
+    width: '12%',
+    fontSize: 12,
+  },
+  backgroundBar: {},
 });
