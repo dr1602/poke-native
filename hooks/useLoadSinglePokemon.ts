@@ -41,6 +41,7 @@ export const useLoadSinglePokemon = (id: string) => {
           height: response.height,
           weight: response.weight,
           cries: response.cries?.latest,
+          stats: response.stats,
         };
 
         setPokemonData(pokemonsArray);

@@ -29,10 +29,22 @@ interface PokemonCries {
   legacy: string;
 }
 
+interface StatInfo {
+  name: string;
+  url: string;
+}
+
+interface PokemonStat {
+  base_stat: number;
+  effort: number;
+  stat: StatInfo;
+}
+
 export interface PokemonExtendedData extends PokemonData {
   height: number;
   weight: number;
   cries?: PokemonCries;
+  stats?: PokemonStat[];
 }
 
 export interface PokemonFinalData {
@@ -48,6 +60,7 @@ export interface PokemonFinalExtendedData extends PokemonFinalData {
   height: number;
   weight: number;
   cries?: string;
+  stats?: PokemonStat[];
 }
 
 interface PokemonProps {
