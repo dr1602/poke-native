@@ -16,7 +16,9 @@ export const Stats = () => {
             </View>
             <View style={styles.blockInfo}>
               <Text style={styles.number}>{item.base_stat}</Text>
-              <View style={styles.backgroundBar}></View>
+              <View style={styles.backgroundBar}>
+                <View style={styles.bar} />
+              </View>
             </View>
           </View>
         );
@@ -52,5 +54,17 @@ const styles = StyleSheet.create({
     width: '12%',
     fontSize: 12,
   },
-  backgroundBar: {},
+  backgroundBar: {
+    backgroundColor: '#FA8072',
+    width: '88%',
+    height: 6,
+    borderRadius: 18,
+    overflow: 'hidden',
+  },
+  bar: {
+    backgroundColor: 'red',
+    width: '100%',
+    height: 6,
+    borderRadius: 18,
+  },
 });
