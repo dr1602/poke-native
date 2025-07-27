@@ -1,5 +1,12 @@
 import { useSearchParams } from 'expo-router/build/hooks';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 import { Header } from '@/components/Pokemon/IndividualPokemon/Header';
 import { Stats } from '@/components/Pokemon/IndividualPokemon/Stats';
@@ -18,7 +25,11 @@ const Pokemon = () => {
   if (loading) {
     return (
       <View>
-        <Text style={styles.loadingText}>Cargando Pokémon...</Text>
+        <ActivityIndicator
+          size='small'
+          style={styles.Spinner}
+          color={'#DF0026'}
+        />
       </View>
     );
   }
@@ -60,6 +71,10 @@ const styles = StyleSheet.create({
     color: 'red',
     fontSize: 18,
     textAlign: 'center',
+  },
+  Spinner: {
+    marginTop: 18,
+    marginBottom: Platform.OS === 'android' ? 90 : 60,
   },
 });
 
