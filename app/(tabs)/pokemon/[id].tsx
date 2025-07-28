@@ -1,5 +1,3 @@
-import { AntDesign } from '@expo/vector-icons';
-import { useNavigation } from 'expo-router';
 import { useSearchParams } from 'expo-router/build/hooks';
 import {
   ActivityIndicator,
@@ -11,6 +9,7 @@ import {
 } from 'react-native';
 
 import { Background } from '@/components/Pokemon/IndividualPokemon/Background';
+import { Header } from '@/components/Pokemon/IndividualPokemon/Header';
 import { Stats } from '@/components/Pokemon/IndividualPokemon/Stats';
 import { Types } from '@/components/Pokemon/IndividualPokemon/Types';
 import { useLoadSinglePokemon } from '@/hooks/useLoadSinglePokemon';
@@ -18,7 +17,7 @@ import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
 
 const Pokemon = () => {
   const params = useSearchParams();
-  const navigation = useNavigation();
+
   const idValue = params.get('id');
   const { loading, error } = useLoadSinglePokemon(idValue as string);
   const pokemonData = usePokemonDetailStore(
@@ -49,15 +48,7 @@ const Pokemon = () => {
 
   return (
     <ScrollView>
-      <View style={styles.ButtonContainer}>
-        <AntDesign
-          name='leftcircleo'
-          size={24}
-          color='#fff'
-          style={{ marginLeft: 18, marginTop: 15, zIndex: 10 }}
-          onPress={navigation.goBack}
-        />
-      </View>
+      <Header />
       <Background />
       <Types />
       <Stats />
