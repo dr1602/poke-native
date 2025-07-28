@@ -10,12 +10,11 @@ import {
   View,
 } from 'react-native';
 
-import { Header } from '@/components/Pokemon/IndividualPokemon/Header';
+import { Background } from '@/components/Pokemon/IndividualPokemon/Background';
 import { Stats } from '@/components/Pokemon/IndividualPokemon/Stats';
 import { Types } from '@/components/Pokemon/IndividualPokemon/Types';
 import { useLoadSinglePokemon } from '@/hooks/useLoadSinglePokemon';
 import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
-import { useEffect } from 'react';
 
 const Pokemon = () => {
   const params = useSearchParams();
@@ -25,16 +24,6 @@ const Pokemon = () => {
   const pokemonData = usePokemonDetailStore(
     (state) => state.currentPokemonData
   );
-
-  useEffect(() => {
-    console.log('✅ El componente Pokemon ha sido montado.');
-    navigation.setOptions({
-      headerRight: () => null,
-      headerLeft: () => {
-        console.log('✨ Renderizando AntDesign icon en headerLeft.');
-      },
-    });
-  }, [navigation, params]);
 
   if (loading) {
     return (
@@ -66,10 +55,10 @@ const Pokemon = () => {
           size={24}
           color='#fff'
           style={{ marginLeft: 18, marginTop: 15, zIndex: 10 }}
-          onPress={() => console.log('Ir atrás')}
+          onPress={navigation.goBack}
         />
       </View>
-      <Header />
+      <Background />
       <Types />
       <Stats />
     </ScrollView>
