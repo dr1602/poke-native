@@ -1,72 +1,28 @@
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-
-import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
-import { capitalize } from '@/utils/capitalize';
-import { getColourByPokemonType } from '@/utils/getColourByPokemonType';
+import { AntDesign } from '@expo/vector-icons';
+import { useNavigation } from 'expo-router';
+import { StyleSheet, View } from 'react-native';
 
 export const Header = () => {
-  const { currentPokemonData } = usePokemonDetailStore();
-
-  const PokemonColour: string = getColourByPokemonType(
-    currentPokemonData?.types[0] || ''
-  );
-  const bgStyles = { backgroundColor: PokemonColour, ...styles.Background };
+  const navigation = useNavigation();
 
   return (
-    <>
-      <View style={bgStyles} />
-      <SafeAreaView style={styles.safeArea}>
-        <View style={styles.imageContainer}>
-          <Image
-            source={{ uri: currentPokemonData?.image }}
-            style={styles.image}
-          />
-        </View>
-        <View style={styles.header}>
-          <Text style={styles.name}>
-            #{`${currentPokemonData?.order}`.padStart(3, '0')}
-            <strong> {capitalize(currentPokemonData?.name || '')} </strong>
-          </Text>
-        </View>
-      </SafeAreaView>
-    </>
+    <View style={styles.ButtonContainer}>
+      <AntDesign
+        name='leftcircleo'
+        size={24}
+        color='#fff'
+        style={{ marginLeft: 18, marginTop: 15, zIndex: 10 }}
+        onPress={navigation.goBack}
+      />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    marginHorizontal: 20,
-    marginTop: 30,
-  },
-  imageContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    top: 30,
-  },
-  image: {
-    width: 250,
-    height: 250,
-    resizeMode: 'contain',
-  },
-  header: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 51,
-  },
-  name: {
-    color: '#fff',
-    fontSize: 21,
-  },
-  Background: {
-    width: '100%',
-    height: 354,
-    justifyContent: 'center',
+  ButtonContainer: {
     position: 'absolute',
-    borderBottomEndRadius: 690,
-    borderBottomLeftRadius: 300,
-    transform: [{ scaleX: 2 }],
+  },
+  PokemonName: {
+    color: 'white',
   },
 });

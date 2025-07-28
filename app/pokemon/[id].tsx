@@ -1,6 +1,14 @@
 import { useSearchParams } from 'expo-router/build/hooks';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
+import { Background } from '@/components/Pokemon/IndividualPokemon/Background';
 import { Header } from '@/components/Pokemon/IndividualPokemon/Header';
 import { Stats } from '@/components/Pokemon/IndividualPokemon/Stats';
 import { Types } from '@/components/Pokemon/IndividualPokemon/Types';
@@ -9,6 +17,7 @@ import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
 
 const Pokemon = () => {
   const params = useSearchParams();
+
   const idValue = params.get('id');
   const { loading, error } = useLoadSinglePokemon(idValue as string);
   const pokemonData = usePokemonDetailStore(
@@ -18,7 +27,11 @@ const Pokemon = () => {
   if (loading) {
     return (
       <View>
-        <Text style={styles.loadingText}>Cargando Pokémon...</Text>
+        <ActivityIndicator
+          size='small'
+          style={styles.Spinner}
+          color={'#DF0026'}
+        />
       </View>
     );
   }
@@ -27,7 +40,7 @@ const Pokemon = () => {
     return (
       <View>
         <Text style={styles.errorText}>
-          {error || 'No se pudo cargar la información del Pokémon.'}
+          {'No se pudo cargar la información del Pokémon.'}
         </Text>
       </View>
     );
@@ -36,6 +49,7 @@ const Pokemon = () => {
   return (
     <ScrollView>
       <Header />
+      <Background />
       <Types />
       <Stats />
     </ScrollView>
@@ -43,6 +57,9 @@ const Pokemon = () => {
 };
 
 const styles = StyleSheet.create({
+  ButtonContainer: {
+    position: 'absolute',
+  },
   PokemonName: {
     color: 'white',
   },
@@ -60,6 +77,10 @@ const styles = StyleSheet.create({
     color: 'red',
     fontSize: 18,
     textAlign: 'center',
+  },
+  Spinner: {
+    marginTop: 30,
+    marginBottom: Platform.OS === 'android' ? 90 : 60,
   },
 });
 
