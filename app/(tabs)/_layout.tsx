@@ -44,15 +44,6 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name='pokemon/[id]'
-        options={{
-          title: '',
-          href: null,
-          headerShown: false,
-          headerTransparent: true,
-        }}
-      />
     </Tabs>
   );
 }
