@@ -68,5 +68,6 @@ const styles = StyleSheet.create({
     borderBottomEndRadius: 690,
     borderBottomLeftRadius: 300,
     transform: [{ scaleX: 2 }],
+    zIndex: -3,
   },
 });

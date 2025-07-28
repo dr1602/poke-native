@@ -1,3 +1,5 @@
+import { AntDesign } from '@expo/vector-icons';
+import { useNavigation } from 'expo-router';
 import { useSearchParams } from 'expo-router/build/hooks';
 import {
   ActivityIndicator,
@@ -13,14 +15,26 @@ import { Stats } from '@/components/Pokemon/IndividualPokemon/Stats';
 import { Types } from '@/components/Pokemon/IndividualPokemon/Types';
 import { useLoadSinglePokemon } from '@/hooks/useLoadSinglePokemon';
 import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
+import { useEffect } from 'react';
 
 const Pokemon = () => {
   const params = useSearchParams();
+  const navigation = useNavigation();
   const idValue = params.get('id');
   const { loading, error } = useLoadSinglePokemon(idValue as string);
   const pokemonData = usePokemonDetailStore(
     (state) => state.currentPokemonData
   );
+
+  useEffect(() => {
+    console.log('✅ El componente Pokemon ha sido montado.');
+    navigation.setOptions({
+      headerRight: () => null,
+      headerLeft: () => {
+        console.log('✨ Renderizando AntDesign icon en headerLeft.');
+      },
+    });
+  }, [navigation, params]);
 
   if (loading) {
     return (
@@ -38,7 +52,7 @@ const Pokemon = () => {
     return (
       <View>
         <Text style={styles.errorText}>
-          {error || 'No se pudo cargar la información del Pokémon.'}
+          {'No se pudo cargar la información del Pokémon.'}
         </Text>
       </View>
     );
@@ -46,6 +60,15 @@ const Pokemon = () => {
 
   return (
     <ScrollView>
+      <View style={styles.ButtonContainer}>
+        <AntDesign
+          name='leftcircleo'
+          size={24}
+          color='#fff'
+          style={{ marginLeft: 18, marginTop: 15, zIndex: 10 }}
+          onPress={() => console.log('Ir atrás')}
+        />
+      </View>
       <Header />
       <Types />
       <Stats />
@@ -54,6 +77,9 @@ const Pokemon = () => {
 };
 
 const styles = StyleSheet.create({
+  ButtonContainer: {
+    position: 'absolute',
+  },
   PokemonName: {
     color: 'white',
   },
@@ -73,7 +99,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   Spinner: {
-    marginTop: 18,
+    marginTop: 30,
     marginBottom: Platform.OS === 'android' ? 90 : 60,
   },
 });
