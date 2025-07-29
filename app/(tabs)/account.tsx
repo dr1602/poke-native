@@ -1,11 +1,16 @@
-import { Text, View } from 'react-native';
+import { LoginForm } from '@/components/Auth/LoginForm';
+import { UserData } from '@/components/Auth/UserData';
+import { StyleSheet, View } from 'react-native';
 
 const Account = () => {
-  return (
-    <View>
-      <Text> Account </Text>
-    </View>
-  );
+  const auth = null;
+  return <View>{auth ? <UserData /> : <LoginForm />}</View>;
 };
+
+const styles = StyleSheet.create({
+  text: {
+    color: '#fff',
+  },
+});
 
 export default Account;
