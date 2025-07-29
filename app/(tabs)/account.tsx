@@ -1,17 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
 import { LoginForm } from '@/components/Auth/LoginForm';
+import { UserData } from '@/components/Auth/UserData';
+import { StyleSheet, View } from 'react-native';
 
 const Account = () => {
   const auth = null;
-  return (
-    <View>
-      {auth ? (
-        <Text style={styles.text}> Panel del usuario</Text>
-      ) : (
-        <LoginForm/>
-      )}
-    </View>
-  );
+  return <View>{auth ? <UserData /> : <LoginForm />}</View>;
 };
 
 const styles = StyleSheet.create({
