@@ -1,9 +1,15 @@
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 export const LoginForm = () => {
   return (
     <View>
-      <Text> Login Form...</Text>
+      <Text style={styles.text}> Login Form...</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  text: {
+    color: '#fff',
+  },
+});

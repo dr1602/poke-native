@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { LoginForm } from '@/components/Auth/LoginForm';
 
 const Account = () => {
   const auth = null;
@@ -7,7 +8,7 @@ const Account = () => {
       {auth ? (
         <Text style={styles.text}> Panel del usuario</Text>
       ) : (
-        <Text style={styles.text}> Formulario de Login</Text>
+        <LoginForm/>
       )}
     </View>
   );
