@@ -1,22 +1,71 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Controller, useForm } from 'react-hook-form';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
+import {
+  initialValues,
+  LoginFormInputs,
+  loginSchema,
+} from '@/utils/Schemas/loginSchema';
+
 export const LoginForm = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormInputs>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: initialValues,
+  });
+
+  const onSubmit = (data: LoginFormInputs) => {
+    console.log(data);
+  };
+
   return (
     <View>
       <Text style={styles.title}> Iniciar sesión </Text>
-      <TextInput
-        placeholder='Usuario'
-        style={styles.input}
-        autoCapitalize='none'
+      <Controller
+        control={control}
+        name='username'
+        render={({ field: { value, onChange, onBlur } }) => (
+          <TextInput
+            placeholder='Usuario'
+            style={styles.input}
+            autoCapitalize='none'
+            value={value}
+            onChangeText={onChange}
+            onBlur={onBlur}
+          />
+        )}
       />
-      <TextInput
-        placeholder='Contraseña'
-        style={styles.input}
-        autoCapitalize='none'
-        secureTextEntry={true}
+
+      {errors.username && (
+        <Text style={styles.error}>{errors.username.message}</Text>
+      )}
+
+      <Controller
+        control={control}
+        name='password'
+        render={({ field: { value, onChange, onBlur } }) => (
+          <TextInput
+            placeholder='Contraseña'
+            style={styles.input}
+            autoCapitalize='none'
+            secureTextEntry={true}
+            value={value}
+            onChangeText={onChange}
+            onBlur={onBlur}
+          />
+        )}
       />
+
+      {errors.password && (
+        <Text style={styles.error}>{errors.password.message}</Text>
+      )}
+
       <View style={styles.buttonContainer}>
-        <Button title='Ingresar' onPress={() => console.log('Ingresando...')} />
+        <Button title='Ingresar' onPress={handleSubmit(onSubmit)} />
       </View>
     </View>
   );
@@ -44,5 +93,10 @@ const styles = StyleSheet.create({
     margin: 12,
     borderRadius: 9,
     objectFit: 'fill',
+  },
+  error: {
+    textAlign: 'center',
+    color: '#f00',
+    marginVertical: 6,
   },
 });
