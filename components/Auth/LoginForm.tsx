@@ -1,58 +1,74 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Controller, useForm } from 'react-hook-form';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import { useForm, Controller } from 'react-hook-form'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers'
+
+import {
+  initialValues,
+  LoginFormInputs,
+  loginSchema,
+} from '@/utils/Schemas/loginSchema';
 
 export const LoginForm = () => {
-  const formik = useFormik({
-    initialValues: initialValues,
-    validationSchema: Yup.object(validationSchema()),
-    validationOnChange: true,
-    onSubmit: (formValue: any) => {
-      console.log(formValue);
-    },
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormInputs>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: initialValues,
   });
+
+  const onSubmit = (data: LoginFormInputs) => {
+    console.log(data);
+  };
 
   return (
     <View>
       <Text style={styles.title}> Iniciar sesión </Text>
-      <TextInput
-        placeholder='Usuario'
-        style={styles.input}
-        autoCapitalize='none'
-        value={formik.values.username}
-        onChangeText={(text) => formik.setFieldValue('username', text)}
+      <Controller
+        control={control}
+        name='username'
+        render={({ field: { value, onChange, onBlur } }) => (
+          <TextInput
+            placeholder='Usuario'
+            style={styles.input}
+            autoCapitalize='none'
+            value={value}
+            onChangeText={onChange}
+            onBlur={onBlur}
+          />
+        )}
       />
-      <TextInput
-        placeholder='Contraseña'
-        style={styles.input}
-        autoCapitalize='none'
-        secureTextEntry={true}
-        value={formik.values.password}
-        onChangeText={(text) => formik.setFieldValue('password', text)}
-      />
-      <View style={styles.buttonContainer}>
-        <Button title='Ingresar' onPress={formik.handleSubmit} />
-      </View>
 
-      <Text style={styles.error}>{formik.errors.username}</Text>
-      <Text style={styles.error}>{formik.errors.password}</Text>
+      {errors.username && (
+        <Text style={styles.error}>{errors.username.message}</Text>
+      )}
+
+      <Controller
+        control={control}
+        name='password'
+        render={({ field: { value, onChange, onBlur } }) => (
+          <TextInput
+            placeholder='Contraseña'
+            style={styles.input}
+            autoCapitalize='none'
+            secureTextEntry={true}
+            value={value}
+            onChangeText={onChange}
+            onBlur={onBlur}
+          />
+        )}
+      />
+
+      {errors.password && (
+        <Text style={styles.error}>{errors.password.message}</Text>
+      )}
+
+      <View style={styles.buttonContainer}>
+        <Button title='Ingresar' onPress={handleSubmit(onSubmit)} />
+      </View>
     </View>
   );
-};
-
-const initialValues = () => {
-  return {
-    username: '',
-    password: '',
-  };
-};
-
-const validationSchema = () => {
-  return {
-    username: Yup.string().required('Usario obligatorio'),
-    password: Yup.string().required('Contraseña obligatoria'),
-  };
 };
 
 const styles = StyleSheet.create({
