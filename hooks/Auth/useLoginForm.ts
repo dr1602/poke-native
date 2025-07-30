@@ -15,8 +15,6 @@ export const useLoginForm = () => {
       setError('El usuario o la contraseña no son correctos.');
       setLoggedInUserDetails(null);
     } else {
-      console.log('Login correcto');
-      console.log(userDetails);
       setLoggedInUserDetails(userDetails);
     }
   };
