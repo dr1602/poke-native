@@ -7,6 +7,7 @@ import {
   LoginFormInputs,
   loginSchema,
 } from '@/utils/Schemas/loginSchema';
+import { user } from '@/utils/db/userDB';
 
 export const LoginForm = () => {
   const {
@@ -19,7 +20,11 @@ export const LoginForm = () => {
   });
 
   const onSubmit = (data: LoginFormInputs) => {
-    console.log(data);
+    const { username, password } = data;
+
+    if (username !== user.username || password !== user.password) {
+      console.log('El usuario o la contraseña no son correctos.');
+    } else console.log('Login correcto');
   };
 
   return (
