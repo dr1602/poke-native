@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
@@ -10,6 +11,7 @@ import {
 import { user, userDetails } from '@/utils/db/userDB';
 
 export const LoginForm = () => {
+  const [error, setError] = useState<any>();
   const {
     control,
     handleSubmit,
@@ -20,15 +22,23 @@ export const LoginForm = () => {
   });
 
   const onSubmit = (data: LoginFormInputs) => {
+    setError('');
     const { username, password } = data;
 
     if (username !== user.username || password !== user.password) {
-      console.log('El usuario o la contraseña no son correctos.');
+      setError('El usuario o la contraseña no son correctos.');
     } else {
       console.log('Login correcto');
       console.log(userDetails);
     }
   };
+
+  useEffect(() => {
+    if (!!error)
+      setTimeout(() => {
+        setError('');
+      }, 3000);
+  }, [error, setError]);
 
   return (
     <View>
@@ -71,6 +81,8 @@ export const LoginForm = () => {
       {errors.password && (
         <Text style={styles.error}>{errors.password.message}</Text>
       )}
+
+      {!!error && <Text style={styles.error}>{error}</Text>}
 
       <View style={styles.buttonContainer}>
         <Button title='Ingresar' onPress={handleSubmit(onSubmit)} />
