@@ -34,10 +34,19 @@ export const LoginForm = () => {
   };
 
   useEffect(() => {
-    if (!!error)
-      setTimeout(() => {
+    let timerId: ReturnType<typeof setTimeout> | null = null;
+
+    if (!!error) {
+      timerId = setTimeout(() => {
         setError('');
       }, 3000);
+    }
+
+    return () => {
+      if (timerId) {
+        clearTimeout(timerId);
+      }
+    };
   }, [error, setError]);
 
   return (
