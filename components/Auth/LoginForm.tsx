@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
+import { useLoginForm } from '@/hooks/Auth/useLoginForm';
 import {
   initialValues,
   LoginFormInputs,
@@ -18,9 +19,7 @@ export const LoginForm = () => {
     defaultValues: initialValues,
   });
 
-  const onSubmit = (data: LoginFormInputs) => {
-    console.log(data);
-  };
+  const { error, loggedInUserDetails, onSubmit } = useLoginForm();
 
   return (
     <View>
@@ -64,6 +63,14 @@ export const LoginForm = () => {
         <Text style={styles.error}>{errors.password.message}</Text>
       )}
 
+      {!!error && <Text style={styles.error}>{error}</Text>}
+
+      {loggedInUserDetails && (
+        <Text style={styles.success}>
+          ¡Bienvenido, {loggedInUserDetails.username}!
+        </Text>
+      )}
+
       <View style={styles.buttonContainer}>
         <Button title='Ingresar' onPress={handleSubmit(onSubmit)} />
       </View>
@@ -97,6 +104,11 @@ const styles = StyleSheet.create({
   error: {
     textAlign: 'center',
     color: '#f00',
+    marginVertical: 6,
+  },
+  success: {
+    textAlign: 'center',
+    color: '#fff',
     marginVertical: 6,
   },
 });
