@@ -97,6 +97,6 @@ const styles = StyleSheet.create({
   error: {
     textAlign: 'center',
     color: '#f00',
-    marginTop: 18,
+    marginVertical: 6,
   },
 });
