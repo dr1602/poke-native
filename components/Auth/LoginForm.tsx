@@ -1,17 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
+import { useLoginForm } from '@/hooks/Auth/useLoginForm';
 import {
   initialValues,
   LoginFormInputs,
   loginSchema,
 } from '@/utils/Schemas/loginSchema';
-import { user, userDetails } from '@/utils/db/userDB';
 
 export const LoginForm = () => {
-  const [error, setError] = useState<any>();
   const {
     control,
     handleSubmit,
@@ -21,33 +19,7 @@ export const LoginForm = () => {
     defaultValues: initialValues,
   });
 
-  const onSubmit = (data: LoginFormInputs) => {
-    setError('');
-    const { username, password } = data;
-
-    if (username !== user.username || password !== user.password) {
-      setError('El usuario o la contraseña no son correctos.');
-    } else {
-      console.log('Login correcto');
-      console.log(userDetails);
-    }
-  };
-
-  useEffect(() => {
-    let timerId: ReturnType<typeof setTimeout> | null = null;
-
-    if (!!error) {
-      timerId = setTimeout(() => {
-        setError('');
-      }, 3000);
-    }
-
-    return () => {
-      if (timerId) {
-        clearTimeout(timerId);
-      }
-    };
-  }, [error, setError]);
+  const { error, loggedInUserDetails, onSubmit } = useLoginForm();
 
   return (
     <View>
@@ -93,6 +65,12 @@ export const LoginForm = () => {
 
       {!!error && <Text style={styles.error}>{error}</Text>}
 
+      {loggedInUserDetails && (
+        <Text style={styles.success}>
+          ¡Bienvenido, {loggedInUserDetails.username}!
+        </Text>
+      )}
+
       <View style={styles.buttonContainer}>
         <Button title='Ingresar' onPress={handleSubmit(onSubmit)} />
       </View>
@@ -126,6 +104,11 @@ const styles = StyleSheet.create({
   error: {
     textAlign: 'center',
     color: '#f00',
+    marginVertical: 6,
+  },
+  success: {
+    textAlign: 'center',
+    color: '#fff',
     marginVertical: 6,
   },
 });
