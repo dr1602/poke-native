@@ -5,4 +5,9 @@ export const loginSchema = z.object({
     password: z.string().nonempty('Contraseña obligatoria')
 })
 
+export const initialValues: LoginFormInputs = {
+  username: '',
+  password: '',
+};
+
 export type LoginFormInputs = z.infer<typeof loginSchema>
