@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 
+import { useAutStore } from '@/store/authStore';
 import { user, userDetails } from '@/utils/db/userDB';
 import { LoginFormInputs } from '@/utils/Schemas/loginSchema';
 
 export const useLoginForm = () => {
+  const { setAuthData, clearAuthData } = useAutStore();
   const [error, setError] = useState<any>();
-  const [loggedInUserDetails, setLoggedInUserDetails] = useState<any>(null);
 
   const onSubmit = (data: LoginFormInputs) => {
     setError('');
@@ -13,9 +14,9 @@ export const useLoginForm = () => {
 
     if (username !== user.username || password !== user.password) {
       setError('El usuario o la contraseña no son correctos.');
-      setLoggedInUserDetails(null);
+      clearAuthData();
     } else {
-      setLoggedInUserDetails(userDetails);
+      setAuthData(userDetails);
     }
   };
 
@@ -35,5 +36,5 @@ export const useLoginForm = () => {
     };
   }, [error, setError]);
 
-  return { error, loggedInUserDetails, onSubmit };
+  return { error, onSubmit };
 };
