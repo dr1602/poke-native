@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import { useAutStore } from '@/store/authStore';
+import { useAuthStore } from '@/store/authStore';
 import { user, userDetails } from '@/utils/db/userDB';
 import { LoginFormInputs } from '@/utils/Schemas/loginSchema';
 
 export const useLoginForm = () => {
-  const { setAuthData, clearAuthData } = useAutStore();
+  const { setAuthData, clearAuthData } = useAuthStore();
   const [error, setError] = useState<any>();
 
   const onSubmit = (data: LoginFormInputs) => {
