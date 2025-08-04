@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 
 import { useAuthStore } from '@/store/authStore';
 import { ItemMenu } from './ItemMenu';
@@ -17,6 +17,10 @@ export const UserData = () => {
         <ItemMenu title='Username' text={`${authData?.username}`} />
         <ItemMenu title='Email' text={`${authData?.email}`} />
         <ItemMenu title='Total Favoritos' text={'0 pokemons'} />
+      </View>
+
+      <View style={styles.logoutButtonContainer}>
+        <Button title={'Desconectarse'} onPress={() => {}} />
       </View>
     </View>
   );
@@ -37,5 +41,8 @@ const styles = StyleSheet.create({
   },
   dataContent: {
     marginBottom: 18,
+  },
+  logoutButtonContainer: {
+    paddingTop: 21,
   },
 });
