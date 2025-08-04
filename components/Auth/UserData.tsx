@@ -4,7 +4,12 @@ import { useAuthStore } from '@/store/authStore';
 import { ItemMenu } from './ItemMenu';
 
 export const UserData = () => {
+  const { clearAuthData } = useAuthStore();
   const authData = useAuthStore((state) => state.currentAuthData);
+
+  const logout = () => {
+    clearAuthData();
+  };
 
   return (
     <View style={styles.content}>
@@ -20,7 +25,7 @@ export const UserData = () => {
       </View>
 
       <View style={styles.logoutButtonContainer}>
-        <Button title={'Desconectarse'} onPress={() => {}} />
+        <Button title={'Desconectarse'} onPress={logout} />
       </View>
     </View>
   );
