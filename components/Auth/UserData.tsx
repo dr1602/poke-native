@@ -1,15 +1,53 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
+
+import { useAuthStore } from '@/store/authStore';
+import { ItemMenu } from './ItemMenu';
 
 export const UserData = () => {
+  const { clearAuthData } = useAuthStore();
+  const authData = useAuthStore((state) => state.currentAuthData);
+
+  const logout = () => {
+    clearAuthData();
+  };
+
   return (
-    <View>
-      <Text style={styles.text}> UserData...</Text>
+    <View style={styles.content}>
+      <View style={styles.titleBlock}>
+        <Text style={styles.title}>¡Bienvenido, {authData?.firstName}!</Text>
+      </View>
+
+      <View style={styles.dataContent}>
+        <ItemMenu title='Nombre' text={`${authData?.firstName}`} />
+        <ItemMenu title='Username' text={`${authData?.username}`} />
+        <ItemMenu title='Email' text={`${authData?.email}`} />
+        <ItemMenu title='Total Favoritos' text={'0 pokemons'} />
+      </View>
+
+      <View style={styles.logoutButtonContainer}>
+        <Button title={'Desconectarse'} onPress={logout} />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  text: {
+  content: {
+    marginHorizontal: 18,
+    marginTop: 18,
+  },
+  titleBlock: {
+    marginBottom: 27,
+  },
+  title: {
     color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 21,
+  },
+  dataContent: {
+    marginBottom: 18,
+  },
+  logoutButtonContainer: {
+    paddingTop: 21,
   },
 });

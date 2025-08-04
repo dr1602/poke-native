@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { useLoginForm } from '@/hooks/Auth/useLoginForm';
-import { useAutStore } from '@/store/authStore';
+import { useAuthStore } from '@/store/authStore';
 import {
   initialValues,
   LoginFormInputs,
@@ -22,7 +22,7 @@ export const LoginForm = () => {
 
   const { error, onSubmit } = useLoginForm();
 
-  const authData = useAutStore((state) => state.currentAuthData);
+  const authData = useAuthStore((state) => state.currentAuthData);
 
   return (
     <View>
@@ -68,10 +68,6 @@ export const LoginForm = () => {
 
       {!!error && <Text style={styles.error}>{error}</Text>}
 
-      {authData && (
-        <Text style={styles.success}>¡Bienvenido, {authData.username}!</Text>
-      )}
-
       <View style={styles.buttonContainer}>
         <Button title='Ingresar' onPress={handleSubmit(onSubmit)} />
       </View>
@@ -105,11 +101,6 @@ const styles = StyleSheet.create({
   error: {
     textAlign: 'center',
     color: '#f00',
-    marginVertical: 6,
-  },
-  success: {
-    textAlign: 'center',
-    color: '#fff',
     marginVertical: 6,
   },
 });
