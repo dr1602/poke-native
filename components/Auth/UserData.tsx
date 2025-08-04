@@ -14,6 +14,9 @@ export const UserData = () => {
 
       <View style={styles.dataContent}>
         <ItemMenu title='Nombre' text={`${authData?.firstName}`} />
+        <ItemMenu title='Username' text={`${authData?.username}`} />
+        <ItemMenu title='Email' text={`${authData?.email}`} />
+        <ItemMenu title='Total Favoritos' text={'0 pokemons'} />
       </View>
     </View>
   );
