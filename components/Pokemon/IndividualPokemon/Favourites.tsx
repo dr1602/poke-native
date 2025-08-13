@@ -1,10 +1,17 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { StyleSheet, View } from 'react-native';
 
+import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
+
 export const Favourites = () => {
+  const pokemonData = usePokemonDetailStore(
+    (state) => state.currentPokemonData
+  );
+
   const addFavourite = () => {
-    console.log('Añadido a favoritos');
+    console.log('Añadido a favoritos', pokemonData?.id);
   };
+
   return (
     <View style={styles.iconContainer}>
       <FontAwesome
