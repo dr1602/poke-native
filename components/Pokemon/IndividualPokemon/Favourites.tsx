@@ -1,6 +1,11 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 
+import {
+  addFavouritePokemon,
+  getFavouritePokemons,
+} from '@/services/favoritesService';
 import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
 
 export const Favourites = () => {
@@ -8,9 +13,18 @@ export const Favourites = () => {
     (state) => state.currentPokemonData
   );
 
-  const addFavourite = () => {
-    console.log('Añadido a favoritos', pokemonData?.id);
+  const addFavourite = async () => {
+    await addFavouritePokemon(pokemonData?.id);
   };
+
+  const fetchFavourites = async () => {
+    const favourites = await getFavouritePokemons();
+    console.log(favourites);
+  };
+
+  useEffect(() => {
+    fetchFavourites;
+  }, []);
 
   return (
     <View style={styles.iconContainer}>

@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { FAVOURITE_STORAGE_KEY } from '@/utils/constants/favouriteStorageConstants';
 
-export const addFavouritePokemon = async (pokemonId: number) => {
+export const addFavouritePokemon = async (pokemonId: number | undefined) => {
   try {
     const favouritePokemons = [];
     favouritePokemons.push(pokemonId);
