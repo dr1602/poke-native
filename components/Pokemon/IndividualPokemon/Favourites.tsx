@@ -1,5 +1,5 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import {
@@ -7,31 +7,71 @@ import {
   getFavouritePokemons,
 } from '@/services/favoritesService';
 import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
+import { HearIconEnum } from '@/utils/constants/iconConstants';
+import { HeartIcon } from '@/utils/types/Icons';
 
 export const Favourites = () => {
+  const [isPokemonSaved, setIsPokemonSaved] = useState<boolean>(false);
+  const [pokemonFavouritesList, setPokemonFavouritesList] = useState<number[]>(
+    []
+  );
+  const [isLoadingFavourites, setIsLoadingFavourites] =
+    useState<boolean>(false);
+  const [icon, setIcon] = useState<HeartIcon>(HearIconEnum.Outline);
+
   const pokemonData = usePokemonDetailStore(
     (state) => state.currentPokemonData
   );
 
-  const addFavourite = async () => {
-    await addFavouritePokemon(pokemonData?.id);
-  };
+  const fetchFavourites = useCallback(async () => {
+    try {
+      setIsLoadingFavourites(true);
+      const favourites = await getFavouritePokemons();
+      setPokemonFavouritesList(favourites);
+      console.log(pokemonFavouritesList);
+    } catch (error) {
+      console.error('Error fetching favourites:', error);
+    } finally {
+      setIsLoadingFavourites(false);
+    }
+  }, []);
 
-  const fetchFavourites = async () => {
-    const favourites = await getFavouritePokemons();
-    console.log(favourites);
+  const addFavourite = async () => {
+    try {
+      await addFavouritePokemon(pokemonData?.id);
+      await fetchFavourites();
+    } catch (error) {
+      console.error('Error fetching favourites:', error);
+    }
   };
 
   useEffect(() => {
-    fetchFavourites;
-  }, []);
+    fetchFavourites();
+  }, [fetchFavourites]);
+
+  useEffect(() => {
+    if (pokemonFavouritesList.length > 0 && pokemonData?.id) {
+      const isSaved = pokemonFavouritesList.includes(pokemonData?.id);
+      setIsPokemonSaved(isSaved);
+    }
+  }, [pokemonData, pokemonData?.id]);
+
+  useEffect(() => {
+    if (isPokemonSaved) {
+      setIcon(HearIconEnum.Filled);
+    } else {
+      setIcon(HearIconEnum.Outline);
+    }
+  }, [isPokemonSaved]);
+
+  console.log(icon);
 
   return (
     <View style={styles.iconContainer}>
       <FontAwesome
-        name='heart-o'
+        name={icon}
         size={24}
-        color='black'
+        color='white'
         onPress={addFavourite}
         style={styles.iconStyles}
       />
