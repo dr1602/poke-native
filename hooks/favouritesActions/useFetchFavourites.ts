@@ -15,7 +15,6 @@ export const useFetchFavourites = (pokemonId: number | undefined) => {
       setIsLoadingFetchFavourites(true);
       const favourites = await getFavouritePokemons();
       setPokemonFavouritesList(favourites);
-      console.log(pokemonFavouritesList);
     } catch (error) {
       console.error('Error fetching favourites:', error);
     } finally {
@@ -24,15 +23,16 @@ export const useFetchFavourites = (pokemonId: number | undefined) => {
   }, []);
 
   useEffect(() => {
-    fetchFavourites();
-  }, [fetchFavourites]);
-
-  useEffect(() => {
-    if (pokemonFavouritesList.length > 0 && pokemonId) {
+    if (pokemonId) {
       const isSaved = pokemonFavouritesList.includes(pokemonId);
       setIsPokemonSaved(isSaved);
     }
-  }, [pokemonFavouritesList.length, pokemonId]);
+  }, [pokemonFavouritesList, pokemonId]);
 
-  return { pokemonFavouritesList, isPokemonSaved, isLoadingFetchFavourites };
+  return {
+    pokemonFavouritesList,
+    isPokemonSaved,
+    isLoadingFetchFavourites,
+    fetchFavourites,
+  };
 };
