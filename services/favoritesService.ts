@@ -31,7 +31,6 @@ export const deleteFavouritePokemon = async (pokemonId: number) => {
     const responseFavourites = await AsyncStorage.getItem(
       FAVOURITE_STORAGE_KEY
     );
-
     if (responseFavourites) {
       const favouritesPokemons = JSON.parse(responseFavourites) as number[];
       const filteredFavourites = favouritesPokemons.filter(
