@@ -1,0 +1,1 @@
+export const FAVOURITE_STORAGE_KEY = 'favouritePokemons';
