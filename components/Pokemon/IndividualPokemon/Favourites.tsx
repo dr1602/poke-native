@@ -5,7 +5,7 @@ import { StyleSheet, View } from 'react-native';
 import {
   addFavouritePokemon,
   getFavouritePokemons,
-} from '@/services/favoritesService';
+} from '@/services/favouritesService';
 import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
 import { HearIconEnum } from '@/utils/constants/iconConstants';
 import { HeartIcon } from '@/utils/types/Icons';
@@ -54,6 +54,8 @@ export const Favourites = () => {
       const isSaved = pokemonFavouritesList.includes(pokemonData?.id);
       setIsPokemonSaved(isSaved);
     }
+
+    console.log(pokemonFavouritesList);
   }, [pokemonData, pokemonData?.id]);
 
   useEffect(() => {
@@ -62,19 +64,29 @@ export const Favourites = () => {
     } else {
       setIcon(HearIconEnum.Outline);
     }
-  }, [isPokemonSaved]);
+  }, [isPokemonSaved, icon]);
 
   console.log(icon);
 
   return (
     <View style={styles.iconContainer}>
-      <FontAwesome
-        name={icon}
-        size={24}
-        color='white'
-        onPress={addFavourite}
-        style={styles.iconStyles}
-      />
+      {icon === HearIconEnum.Outline ? (
+        <FontAwesome
+          name={HearIconEnum.Outline}
+          size={24}
+          color='white'
+          onPress={addFavourite}
+          style={styles.iconStyles}
+        />
+      ) : (
+        <FontAwesome
+          name={HearIconEnum.Filled}
+          size={24}
+          color='white'
+          onPress={addFavourite}
+          style={styles.iconStyles}
+        />
+      )}
     </View>
   );
 };
