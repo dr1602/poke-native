@@ -1,4 +1,4 @@
-export enum HearIconEnum {
+export enum HeartIconEnum {
   Filled = 'heart',
   Outline = 'heart-o',
 }

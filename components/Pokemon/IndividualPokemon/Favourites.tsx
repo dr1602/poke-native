@@ -7,11 +7,11 @@ import { useAddFavourites } from '@/hooks/favouritesActions/useAddFavourites';
 import { useDeleteFavourites } from '@/hooks/favouritesActions/useDeleteFavourites';
 import { useFetchFavourites } from '@/hooks/favouritesActions/useFetchFavourites';
 import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
-import { HearIconEnum } from '@/utils/constants/iconConstants';
+import { HeartIconEnum } from '@/utils/constants/iconConstants';
 import { HeartIcon } from '@/utils/types/Icons';
 
 export const Favourites = () => {
-  const [icon, setIcon] = useState<HeartIcon>(HearIconEnum.Outline);
+  const [icon, setIcon] = useState<HeartIcon>(HeartIconEnum.Outline);
 
   const pokemonData = usePokemonDetailStore(
     (state) => state.currentPokemonData
@@ -35,13 +35,13 @@ export const Favourites = () => {
 
   useEffect(() => {
     if (isPokemonSaved) {
-      setIcon(HearIconEnum.Filled);
+      setIcon(HeartIconEnum.Filled);
     } else {
-      setIcon(HearIconEnum.Outline);
+      setIcon(HeartIconEnum.Outline);
     }
   }, [isPokemonSaved, icon]);
 
-  const shouldRenderOutlineHeartIcon = icon === HearIconEnum.Outline;
+  const shouldRenderOutlineHeartIcon = icon === HeartIconEnum.Outline;
   const isLoading =
     isLoadingFetchFavourites ||
     isLoadingAddFavourites ||
@@ -59,7 +59,7 @@ export const Favourites = () => {
         </Case>
         <Case condition={shouldRenderOutlineHeartIcon}>
           <FontAwesome
-            name={HearIconEnum.Outline}
+            name={HeartIconEnum.Outline}
             size={24}
             color='white'
             onPress={AddAndFetchFavourites}
@@ -68,7 +68,7 @@ export const Favourites = () => {
         </Case>
         <Default>
           <FontAwesome
-            name={HearIconEnum.Filled}
+            name={HeartIconEnum.Filled}
             size={24}
             color='white'
             onPress={DeleteAndFetchFavourites}
