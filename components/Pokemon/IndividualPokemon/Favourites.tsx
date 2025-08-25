@@ -1,62 +1,37 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Case, Default, Switch } from 'react-if';
+import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
 
-import {
-  addFavouritePokemon,
-  getFavouritePokemons,
-} from '@/services/favouritesService';
+import { useAddFavourites } from '@/hooks/favouritesActions/useAddFavourites';
+import { useDeleteFavourites } from '@/hooks/favouritesActions/useDeleteFavourites';
+import { useFetchFavourites } from '@/hooks/favouritesActions/useFetchFavourites';
 import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
 import { HearIconEnum } from '@/utils/constants/iconConstants';
 import { HeartIcon } from '@/utils/types/Icons';
 
 export const Favourites = () => {
-  const [isPokemonSaved, setIsPokemonSaved] = useState<boolean>(false);
-  const [pokemonFavouritesList, setPokemonFavouritesList] = useState<number[]>(
-    []
-  );
-  const [isLoadingFavourites, setIsLoadingFavourites] =
-    useState<boolean>(false);
   const [icon, setIcon] = useState<HeartIcon>(HearIconEnum.Outline);
 
   const pokemonData = usePokemonDetailStore(
     (state) => state.currentPokemonData
   );
 
-  const fetchFavourites = useCallback(async () => {
-    try {
-      setIsLoadingFavourites(true);
-      const favourites = await getFavouritePokemons();
-      setPokemonFavouritesList(favourites);
-      console.log(pokemonFavouritesList);
-    } catch (error) {
-      console.error('Error fetching favourites:', error);
-    } finally {
-      setIsLoadingFavourites(false);
-    }
-  }, []);
+  const { isPokemonSaved, isLoadingFetchFavourites, fetchFavourites } =
+    useFetchFavourites(pokemonData?.id);
+  const { isLoadingAddFavourites, addFavourite } = useAddFavourites();
+  const { isLoadingDeleteFavourites, deleteFavourite } = useDeleteFavourites();
 
-  const addFavourite = async () => {
-    try {
-      await addFavouritePokemon(pokemonData?.id);
-      await fetchFavourites();
-    } catch (error) {
-      console.error('Error fetching favourites:', error);
-    }
+  const AddAndFetchFavourites = async () => {
+    await addFavourite(pokemonData?.id);
+    fetchFavourites();
   };
 
-  useEffect(() => {
+  const DeleteAndFetchFavourites = async () => {
     fetchFavourites();
-  }, [fetchFavourites]);
-
-  useEffect(() => {
-    if (pokemonFavouritesList.length > 0 && pokemonData?.id) {
-      const isSaved = pokemonFavouritesList.includes(pokemonData?.id);
-      setIsPokemonSaved(isSaved);
-    }
-
-    console.log(pokemonFavouritesList);
-  }, [pokemonData, pokemonData?.id]);
+    await deleteFavourite(pokemonData?.id);
+    fetchFavourites();
+  };
 
   useEffect(() => {
     if (isPokemonSaved) {
@@ -66,27 +41,41 @@ export const Favourites = () => {
     }
   }, [isPokemonSaved, icon]);
 
-  console.log(icon);
+  const shouldRenderOutlineHeartIcon = icon === HearIconEnum.Outline;
+  const isLoading =
+    isLoadingFetchFavourites ||
+    isLoadingAddFavourites ||
+    isLoadingDeleteFavourites;
 
   return (
     <View style={styles.iconContainer}>
-      {icon === HearIconEnum.Outline ? (
-        <FontAwesome
-          name={HearIconEnum.Outline}
-          size={24}
-          color='white'
-          onPress={addFavourite}
-          style={styles.iconStyles}
-        />
-      ) : (
-        <FontAwesome
-          name={HearIconEnum.Filled}
-          size={24}
-          color='white'
-          onPress={addFavourite}
-          style={styles.iconStyles}
-        />
-      )}
+      <Switch>
+        <Case condition={isLoading}>
+          <ActivityIndicator
+            size='small'
+            style={styles.Spinner}
+            color={'#fff'}
+          />
+        </Case>
+        <Case condition={shouldRenderOutlineHeartIcon}>
+          <FontAwesome
+            name={HearIconEnum.Outline}
+            size={24}
+            color='white'
+            onPress={AddAndFetchFavourites}
+            style={styles.iconStyles}
+          />
+        </Case>
+        <Default>
+          <FontAwesome
+            name={HearIconEnum.Filled}
+            size={24}
+            color='white'
+            onPress={DeleteAndFetchFavourites}
+            style={styles.iconStyles}
+          />
+        </Default>
+      </Switch>
     </View>
   );
 };
@@ -98,4 +87,8 @@ const styles = StyleSheet.create({
     top: 15,
   },
   iconStyles: { color: 'white' },
+  Spinner: {
+    marginTop: 30,
+    marginBottom: Platform.OS === 'android' ? 60 : 30,
+  },
 });
