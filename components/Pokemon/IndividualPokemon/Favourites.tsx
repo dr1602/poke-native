@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react';
 import { Case, Default, Switch } from 'react-if';
 import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
 
-import { useAddFavourites } from '@/hooks/favouritesActions/useAddFavourites';
-import { useDeleteFavourites } from '@/hooks/favouritesActions/useDeleteFavourites';
 import { useFetchFavourites } from '@/hooks/favouritesActions/useFetchFavourites';
+import { useModifyFavourites } from '@/hooks/favouritesActions/useModifyFavourites';
 import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
 import { HeartIconEnum } from '@/utils/constants/iconConstants';
 import { HeartIcon } from '@/utils/types/Icons';
@@ -19,17 +18,11 @@ export const Favourites = () => {
 
   const { isPokemonSaved, isLoadingFetchFavourites, fetchFavourites } =
     useFetchFavourites(pokemonData?.id);
-  const { isLoadingAddFavourites, addFavourite } = useAddFavourites();
-  const { isLoadingDeleteFavourites, deleteFavourite } = useDeleteFavourites();
+  const { isLoadingModifyFavourites, modifyFavourites } = useModifyFavourites();
 
-  const AddAndFetchFavourites = async () => {
-    await addFavourite(pokemonData?.id);
+  const handleModifyFavourites = async () => {
     fetchFavourites();
-  };
-
-  const DeleteAndFetchFavourites = async () => {
-    fetchFavourites();
-    await deleteFavourite(pokemonData?.id);
+    await modifyFavourites(pokemonData?.id);
     fetchFavourites();
   };
 
@@ -42,10 +35,7 @@ export const Favourites = () => {
   }, [isPokemonSaved, icon]);
 
   const shouldRenderOutlineHeartIcon = icon === HeartIconEnum.Outline;
-  const isLoading =
-    isLoadingFetchFavourites ||
-    isLoadingAddFavourites ||
-    isLoadingDeleteFavourites;
+  const isLoading = isLoadingFetchFavourites || isLoadingModifyFavourites;
 
   return (
     <View style={styles.iconContainer}>
@@ -62,7 +52,7 @@ export const Favourites = () => {
             name={HeartIconEnum.Outline}
             size={24}
             color='white'
-            onPress={AddAndFetchFavourites}
+            onPress={handleModifyFavourites}
             style={styles.iconStyles}
           />
         </Case>
@@ -71,7 +61,7 @@ export const Favourites = () => {
             name={HeartIconEnum.Filled}
             size={24}
             color='white'
-            onPress={DeleteAndFetchFavourites}
+            onPress={handleModifyFavourites}
             style={styles.iconStyles}
           />
         </Default>
