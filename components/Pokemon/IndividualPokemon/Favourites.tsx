@@ -21,18 +21,18 @@ export const Favourites = () => {
   const { isLoadingModifyFavourites, modifyFavourites } = useModifyFavourites();
 
   const handleModifyFavourites = async () => {
-    fetchFavourites();
     await modifyFavourites(pokemonData?.id);
     fetchFavourites();
   };
 
   useEffect(() => {
+    fetchFavourites();
     if (isPokemonSaved) {
       setIcon(HeartIconEnum.Filled);
     } else {
       setIcon(HeartIconEnum.Outline);
     }
-  }, [isPokemonSaved, icon]);
+  }, [isPokemonSaved, icon, fetchFavourites]);
 
   const shouldRenderOutlineHeartIcon = icon === HeartIconEnum.Outline;
   const isLoading = isLoadingFetchFavourites || isLoadingModifyFavourites;
