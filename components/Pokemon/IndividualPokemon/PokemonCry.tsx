@@ -6,7 +6,7 @@ export const PokemonCry = () => {
     <View style={styles.soundButtonContainer}>
       <AntDesign
         name='sound'
-        size={24}
+        size={21}
         color='#fff'
         style={{ marginLeft: 18, marginTop: 15, zIndex: 10 }}
         onPress={() => {}}
@@ -20,6 +20,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    top: -39,
+    top: -33,
   },
 });
