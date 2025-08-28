@@ -16,9 +16,9 @@ export const usePokemonCry = () => {
         return;
       }
 
+      setIsPlayingCry(true);
       soundIstance.play((success) => {
         if (success) {
-          setIsPlayingCry(true);
           console.log('Reproducción exitosa');
         } else {
           console.log('Reproducción fallida');
