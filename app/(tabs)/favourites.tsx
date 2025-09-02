@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native';
 
+
 import { useFavouritesStore } from '@/store/favouritesStore';
 
 const favourites = () => {
   const { currentFavouritesData } = useFavouritesStore();
-  console.log(currentFavouritesData);
 
   return (
     <View>

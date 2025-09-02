@@ -3,7 +3,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { useLoginForm } from '@/hooks/Auth/useLoginForm';
-import { useAuthStore } from '@/store/authStore';
 import {
   initialValues,
   LoginFormInputs,
@@ -21,8 +20,6 @@ export const LoginForm = () => {
   });
 
   const { error, onSubmit } = useLoginForm();
-
-  const authData = useAuthStore((state) => state.currentAuthData);
 
   return (
     <View>
