@@ -1,7 +1,13 @@
 import { AntDesign } from '@expo/vector-icons';
 import { StyleSheet, View } from 'react-native';
 
+import { usePokemonCry } from '@/hooks/usePokemonCry';
+import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
+
 export const PokemonCry = () => {
+  const { currentPokemonData } = usePokemonDetailStore();
+  const { playPokeCry } = usePokemonCry(currentPokemonData?.cries);
+
   return (
     <View style={styles.soundButtonContainer}>
       <AntDesign
@@ -9,7 +15,8 @@ export const PokemonCry = () => {
         size={21}
         color='#fff'
         style={{ marginLeft: 18, marginTop: 15, zIndex: 10 }}
-        onPress={() => {}}
+        // onPress={() => {}}
+        onPress={playPokeCry}
       />
     </View>
   );

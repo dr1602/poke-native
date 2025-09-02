@@ -1,33 +1,37 @@
-import { useState } from 'react';
-import Sound from 'react-native-sound';
+import { Audio } from 'expo-av';
+import { useEffect, useState } from 'react';
 
-export const usePokemonCry = () => {
-  const [isPlayingCry, setIsPlayingCry] = useState<boolean>(false);
+export const usePokemonCry = (cryUrl: string | undefined) => {
+  const [isPokeCryLoading, setIsPokeCryLoading] = useState<boolean>(false);
+  const [pokemonCry, setPokemonCry] = useState<any>(null);
 
-  const playCry = (cryUrl: string) => {
+  const playPokeCry = async () => {
+    console.log('Cargando grito');
+    setIsPokeCryLoading(true);
     if (!cryUrl) {
       console.log('URL de grito no disponible');
+      setIsPokeCryLoading(false);
       return;
     }
 
-    const soundIstance = new Sound(cryUrl, undefined, (error) => {
-      if (error) {
-        console.error('Error al cargar el sonido', error);
-        return;
-      }
-
-      setIsPlayingCry(true);
-      soundIstance.play((success) => {
-        if (success) {
-          console.log('Reproducción exitosa');
-        } else {
-          console.log('Reproducción fallida');
-        }
-        soundIstance.release();
-        setIsPlayingCry(false);
-      });
-    });
+    try {
+      const { sound } = await Audio.Sound.createAsync({ uri: cryUrl });
+      setPokemonCry(sound);
+      await sound.playAsync();
+    } catch (error) {
+      console.error('Error al reproducir', error);
+    } finally {
+      setIsPokeCryLoading(false);
+    }
   };
 
-  return { playCry, isPlayingCry };
+  useEffect(() => {
+    return pokemonCry
+      ? () => {
+          pokemonCry.unloadAsync();
+        }
+      : undefined;
+  }, [pokemonCry]);
+
+  return { playPokeCry, isPokeCryLoading };
 };
