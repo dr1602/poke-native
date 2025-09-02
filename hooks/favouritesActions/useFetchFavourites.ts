@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { getFavouritePokemons } from '@/services/favouritesService';
+import { useFavouritesStore } from '@/store/favouritesStore';
+import { removeDuplicates } from '@/utils/removeDuplicates';
 
 export const useFetchFavourites = (pokemonId: number | undefined) => {
-  const [pokemonFavouritesList, setPokemonFavouritesList] = useState<number[]>(
-    []
-  );
+  const { currentFavouritesData, setFavouritesData } = useFavouritesStore();
   const [isPokemonSaved, setIsPokemonSaved] = useState<boolean>(false);
   const [isLoadingFetchFavourites, setIsLoadingFetchFavourites] =
     useState<boolean>(false);
@@ -13,8 +13,9 @@ export const useFetchFavourites = (pokemonId: number | undefined) => {
   const fetchFavourites = useCallback(async () => {
     try {
       setIsLoadingFetchFavourites(true);
-      const favourites = await getFavouritePokemons();
-      setPokemonFavouritesList(favourites);
+      const favourites: number[] = await getFavouritePokemons();
+      const uniqueFavourites = removeDuplicates(favourites);
+      setFavouritesData(uniqueFavourites);
     } catch (error) {
       console.error('Error fetching favourites:', error);
     } finally {
@@ -24,13 +25,12 @@ export const useFetchFavourites = (pokemonId: number | undefined) => {
 
   useEffect(() => {
     if (pokemonId) {
-      const isSaved = pokemonFavouritesList.includes(pokemonId);
+      const isSaved = currentFavouritesData.includes(pokemonId);
       setIsPokemonSaved(isSaved);
     }
-  }, [pokemonFavouritesList, pokemonId]);
+  }, [currentFavouritesData, pokemonId]);
 
   return {
-    pokemonFavouritesList,
     isPokemonSaved,
     isLoadingFetchFavourites,
     fetchFavourites,

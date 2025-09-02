@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { useFetchFavourites } from '@/hooks/favouritesActions/useFetchFavourites';
 import { useAuthStore } from '@/store/authStore';
 import { user, userDetails } from '@/utils/db/userDB';
 import { LoginFormInputs } from '@/utils/Schemas/loginSchema';
@@ -7,6 +8,12 @@ import { LoginFormInputs } from '@/utils/Schemas/loginSchema';
 export const useLoginForm = () => {
   const { setAuthData, clearAuthData } = useAuthStore();
   const [error, setError] = useState<any>();
+
+  const { fetchFavourites } = useFetchFavourites(undefined);
+
+  useEffect(() => {
+    fetchFavourites();
+  }, [fetchFavourites]);
 
   const onSubmit = (data: LoginFormInputs) => {
     setError('');
