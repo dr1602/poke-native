@@ -3,6 +3,7 @@ import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
 import { capitalize } from '@/utils/capitalize';
 import { getColourByPokemonType } from '@/utils/getColourByPokemonType';
+import { PokemonCry } from './PokemonCry';
 
 export const Background = () => {
   const { currentPokemonData } = usePokemonDetailStore();
@@ -28,6 +29,7 @@ export const Background = () => {
             <strong> {capitalize(currentPokemonData?.name || '')} </strong>
           </Text>
         </View>
+        <PokemonCry />
       </SafeAreaView>
     </>
   );
@@ -55,6 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 51,
+    transform: [{ translateY: 39 }],
   },
   name: {
     color: '#fff',
