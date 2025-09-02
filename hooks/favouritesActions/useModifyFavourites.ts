@@ -5,6 +5,7 @@ import {
   deleteFavouritePokemon,
   getFavouritePokemons,
 } from '@/services/favouritesService';
+import { removeDuplicates } from '@/utils/removeDuplicates';
 
 export const useModifyFavourites = () => {
   const [isLoadingModifyFavourites, setIsLoadingModifyFavourites] =
@@ -16,8 +17,8 @@ export const useModifyFavourites = () => {
       if (!pokemonId) return;
 
       const favourites: number[] = await getFavouritePokemons();
-
-      const isPokemonSaved = favourites.includes(pokemonId);
+      const uniqueFavourites = removeDuplicates(favourites);
+      const isPokemonSaved = uniqueFavourites.includes(pokemonId);
 
       if (!isPokemonSaved) {
         // si no existe el pokemon en el array, lo añade
