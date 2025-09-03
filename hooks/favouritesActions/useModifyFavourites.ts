@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import {
   addFavouritePokemon,
-  deleteFavouritePokemon,
+  deleteSingleFavouritePokemon,
   getFavouritePokemons,
 } from '@/services/favouritesService';
 import { removeDuplicates } from '@/utils/removeDuplicates';
@@ -25,7 +25,7 @@ export const useModifyFavourites = () => {
         await addFavouritePokemon(pokemonId);
       } else {
         // si ya existe el pokemon en el array, lo elimina
-        await deleteFavouritePokemon(pokemonId);
+        await deleteSingleFavouritePokemon(pokemonId);
       }
     } catch (error) {
       console.error('Error fetching favourites:', error);

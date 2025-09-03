@@ -26,7 +26,7 @@ export const getFavouritePokemons = async () => {
   }
 };
 
-export const deleteFavouritePokemon = async (pokemonId: number) => {
+export const deleteSingleFavouritePokemon = async (pokemonId: number) => {
   try {
     const responseFavourites = await AsyncStorage.getItem(
       FAVOURITE_STORAGE_KEY
@@ -43,5 +43,17 @@ export const deleteFavouritePokemon = async (pokemonId: number) => {
     }
   } catch (error) {
     console.error('Error eliminando pokemon', error);
+  }
+};
+
+export const deleteAllFavouritePokemons = async () => {
+  try {
+    const favouritePokemons: number[] = [];
+    await AsyncStorage.setItem(
+      FAVOURITE_STORAGE_KEY,
+      JSON.stringify(favouritePokemons)
+    );
+  } catch (error) {
+    console.error('Error eliminando pokemons', error);
   }
 };
