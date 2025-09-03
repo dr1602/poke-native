@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import {
   deleteAllFavouritePokemons,
   getFavouritePokemons,
-} from '@/chore/services/favouritesKeyStorageService';
+} from '@/chore/services/favouritesIdStorageService';
 import { useFavouritesStore } from '@/store/favouritesStore';
 
 export const useDeleteAllFavourites = () => {
