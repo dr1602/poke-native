@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { getFavouritePokemons } from '@/chore/services/favouritesService';
+import { getFavouritePokemons } from '@/chore/services/favouritesKeyStorageService';
 import { useFavouritesStore } from '@/store/favouritesStore';
 import { removeDuplicates } from '@/utils/removeDuplicates';
 
