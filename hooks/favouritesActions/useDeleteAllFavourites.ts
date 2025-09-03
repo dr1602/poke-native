@@ -6,7 +6,7 @@ import {
 } from '@/services/favouritesService';
 import { useFavouritesStore } from '@/store/favouritesStore';
 
-export const useFetchFavourites = () => {
+export const useDeleteAllFavourites = () => {
   const { setFavouritesData } = useFavouritesStore();
   const [isLoadingDelete, setIsLoadingDelete] = useState<boolean>(false);
 
