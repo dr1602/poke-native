@@ -4,7 +4,7 @@ import {
   addFavouritePokemon,
   deleteSingleFavouritePokemon,
   getFavouritePokemons,
-} from '@/services/favouritesService';
+} from '@/chore/services/favouritesService';
 import { removeDuplicates } from '@/utils/removeDuplicates';
 
 export const useModifyFavourites = () => {
