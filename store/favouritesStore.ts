@@ -1,13 +1,13 @@
 import { create } from 'zustand';
 
 interface FavouritesDataState {
-  currentFavouritesData: number[];
-  setFavouritesData: (data: number[]) => void;
-  clearFavouritesData: () => void;
+  currentFavouritesByIdData: number[];
+  setFavouritesByIdData: (data: number[]) => void;
+  clearFavouritesByIdData: () => void;
 }
 
-export const useFavouritesStore = create<FavouritesDataState>((set) => ({
-  currentFavouritesData: [],
-  setFavouritesData: (data) => set({ currentFavouritesData: data }),
-  clearFavouritesData: () => ({ currentFavouritesData: [] }),
+export const useFavouritesByIdStore = create<FavouritesDataState>((set) => ({
+  currentFavouritesByIdData: [],
+  setFavouritesByIdData: (data) => set({ currentFavouritesByIdData: data }),
+  clearFavouritesByIdData: () => ({ currentFavouritesByIdData: [] }),
 }));

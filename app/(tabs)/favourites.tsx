@@ -2,14 +2,12 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 
 import { useDeleteAllFavourites } from '@/hooks/favouritesActions/useDeleteAllFavourites';
 import { useAuthStore } from '@/store/authStore';
-import { useFavouritesStore } from '@/store/favouritesStore';
+import { useFavouritesByIdStore } from '@/store/favouritesStore';
 
 const favourites = () => {
   const authData = useAuthStore((state) => state.currentAuthData);
-  const { currentFavouritesData } = useFavouritesStore();
+  const { currentFavouritesByIdData } = useFavouritesByIdStore();
   const { deleteFavourites } = useDeleteAllFavourites();
-
-  console.log(currentFavouritesData);
 
   return (
     <>
@@ -21,7 +19,7 @@ const favourites = () => {
         </View>
       ) : (
         <View>
-          <Text style={styles.TextColor}> {currentFavouritesData} </Text>
+          <Text style={styles.TextColor}> {currentFavouritesByIdData} </Text>
           <Button title='Delete all' onPress={deleteFavourites} />{' '}
         </View>
       )}

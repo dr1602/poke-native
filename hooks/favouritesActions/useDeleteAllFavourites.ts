@@ -4,10 +4,10 @@ import {
   deleteAllFavouritePokemons,
   getFavouritePokemons,
 } from '@/chore/services/favouritesIdStorageService';
-import { useFavouritesStore } from '@/store/favouritesStore';
+import { useFavouritesByIdStore } from '@/store/favouritesStore';
 
 export const useDeleteAllFavourites = () => {
-  const { setFavouritesData } = useFavouritesStore();
+  const { setFavouritesByIdData } = useFavouritesByIdStore();
   const [isLoadingDelete, setIsLoadingDelete] = useState<boolean>(false);
 
   const deleteFavourites = useCallback(async () => {
@@ -15,7 +15,7 @@ export const useDeleteAllFavourites = () => {
       setIsLoadingDelete(true);
       await deleteAllFavouritePokemons();
       const favourites: number[] = await getFavouritePokemons();
-      setFavouritesData(favourites);
+      setFavouritesByIdData(favourites);
     } catch (error) {
       console.error('Error deleting favourites:', error);
     } finally {
