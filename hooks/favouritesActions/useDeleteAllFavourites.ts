@@ -4,7 +4,7 @@ import {
   deleteAllFavouritePokemons,
   getFavouritePokemons,
 } from '@/chore/services/favouritesIdStorageService';
-import { useFavouritesByIdStore } from '@/store/favouritesStore';
+import { useFavouritesByIdStore } from '@/store/favouritesByIdStore';
 
 export const useDeleteAllFavourites = () => {
   const { setFavouritesByIdData } = useFavouritesByIdStore();

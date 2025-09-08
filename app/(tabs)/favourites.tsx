@@ -2,7 +2,7 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 
 import { useDeleteAllFavourites } from '@/hooks/favouritesActions/useDeleteAllFavourites';
 import { useAuthStore } from '@/store/authStore';
-import { useFavouritesByIdStore } from '@/store/favouritesStore';
+import { useFavouritesByIdStore } from '@/store/favouritesByIdStore';
 
 const favourites = () => {
   const authData = useAuthStore((state) => state.currentAuthData);

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { getFavouritePokemons } from '@/chore/services/favouritesIdStorageService';
-import { useFavouritesByIdStore } from '@/store/favouritesStore';
+import { useFavouritesByIdStore } from '@/store/favouritesByIdStore';
 import { removeDuplicates } from '@/utils/removeDuplicates';
 
 export const useFetchFavourites = (pokemonId: number | undefined) => {
