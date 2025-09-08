@@ -1,11 +1,17 @@
 import { Button, StyleSheet, Text, View } from 'react-native';
 
 import { useAuthStore } from '@/store/authStore';
+import { useFavouritesByIdStore } from '@/store/favouritesByIdStore';
 import { ItemMenu } from './ItemMenu';
 
 export const UserData = () => {
   const { clearAuthData } = useAuthStore();
   const authData = useAuthStore((state) => state.currentAuthData);
+  const { currentFavouritesByIdData } = useFavouritesByIdStore();
+
+  console.log('currentFavouritesByIdData', currentFavouritesByIdData.length);
+
+  const qtyOfFavourites = currentFavouritesByIdData.length;
 
   const logout = () => {
     clearAuthData();
@@ -21,7 +27,10 @@ export const UserData = () => {
         <ItemMenu title='Nombre' text={`${authData?.firstName}`} />
         <ItemMenu title='Username' text={`${authData?.username}`} />
         <ItemMenu title='Email' text={`${authData?.email}`} />
-        <ItemMenu title='Total Favoritos' text={'0 pokemons'} />
+        <ItemMenu
+          title='Total Favoritos'
+          text={`${qtyOfFavourites} pokemon${qtyOfFavourites !== 1 ? 's' : ''}`}
+        />
       </View>
 
       <View style={styles.logoutButtonContainer}>
