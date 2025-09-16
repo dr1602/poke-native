@@ -16,8 +16,10 @@ export const Favourites = () => {
     (state) => state.currentPokemonData
   );
 
+  
   const { isPokemonSaved, isLoadingFetchFavourites, fetchFavourites } =
     useFetchFavourites(pokemonData?.id);
+
   const { isLoadingModifyFavourites, modifyFavourites } = useModifyFavourites();
 
   const handleModifyFavourites = async () => {

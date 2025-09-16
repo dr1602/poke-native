@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { getFavouritePokemons } from '@/chore/services/favouritesIdStorageService';
+import { getFavouritePokemonsId } from '@/chore/services/favouritesIdStorageService';
 import { useFavouritesByIdStore } from '@/store/favouritesByIdStore';
 import { removeDuplicates } from '@/utils/removeDuplicates';
 
@@ -14,7 +14,7 @@ export const useFetchFavourites = (pokemonId: number | undefined) => {
   const fetchFavourites = useCallback(async () => {
     try {
       setIsLoadingFetchFavourites(true);
-      const favourites: number[] = await getFavouritePokemons();
+      const favourites: number[] = await getFavouritePokemonsId();
       const uniqueFavourites = removeDuplicates(favourites);
       setFavouritesByIdData(uniqueFavourites);
     } catch (error) {

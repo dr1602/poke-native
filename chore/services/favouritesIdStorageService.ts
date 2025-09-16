@@ -2,9 +2,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { FAVOURITE_STORAGE_ID_KEY } from '@/utils/constants/favouriteStorageConstants';
 
-export const addFavouritePokemon = async (pokemonId: number | undefined) => {
+export const addFavouritePokemonId = async (pokemonId: number | undefined) => {
   try {
-    const favouritePokemons = [...(await getFavouritePokemons())];
+    const favouritePokemons = [...(await getFavouritePokemonsId())];
     favouritePokemons.push(pokemonId);
     await AsyncStorage.setItem(
       FAVOURITE_STORAGE_ID_KEY,
@@ -15,7 +15,7 @@ export const addFavouritePokemon = async (pokemonId: number | undefined) => {
   }
 };
 
-export const getFavouritePokemons = async () => {
+export const getFavouritePokemonsId = async () => {
   try {
     const responseFavourites = await AsyncStorage.getItem(
       FAVOURITE_STORAGE_ID_KEY
@@ -26,7 +26,7 @@ export const getFavouritePokemons = async () => {
   }
 };
 
-export const deleteSingleFavouritePokemon = async (pokemonId: number) => {
+export const deleteSingleFavouritePokemonId = async (pokemonId: number) => {
   try {
     const responseFavourites = await AsyncStorage.getItem(
       FAVOURITE_STORAGE_ID_KEY

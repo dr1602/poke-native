@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 
 import {
   deleteAllFavouritePokemons,
-  getFavouritePokemons,
+  getFavouritePokemonsId,
 } from '@/chore/services/favouritesIdStorageService';
 import { useFavouritesByIdStore } from '@/store/favouritesByIdStore';
 
@@ -14,7 +14,7 @@ export const useDeleteAllFavourites = () => {
     try {
       setIsLoadingDelete(true);
       await deleteAllFavouritePokemons();
-      const favourites: number[] = await getFavouritePokemons();
+      const favourites: number[] = await getFavouritePokemonsId();
       setFavouritesByIdData(favourites);
     } catch (error) {
       console.error('Error deleting favourites:', error);
