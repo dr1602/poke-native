@@ -57,7 +57,7 @@ export const deleteSingleFavouritePokemonData = async (
 
 export const deleteAllFavouritePokemonsData = async () => {
   try {
-    const favouritePokemons: number[] = [];
+    const favouritePokemons: PokemonFinalExtendedData[] = [];
     await AsyncStorage.setItem(
       FAVOURITE_STORAGE_DATA_KEY,
       JSON.stringify(favouritePokemons)

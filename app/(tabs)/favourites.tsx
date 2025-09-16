@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
 import { useDeleteAllFavourites } from '@/hooks/favouritesActions/useDeleteAllFavourites';
@@ -11,12 +12,17 @@ const favourites = () => {
   const { currentFavouritesByIdData } = useFavouritesByIdStore();
   const { deleteFavourites } = useDeleteAllFavourites();
   const { deleteAllFavouritesData } = useDeleteAllFavouritesData();
-  const { allFavouritesData } = useFetchFavouritesData();
+  const { allFavouritesData, fetchFavourites } = useFetchFavouritesData();
 
   const deleteAction = () => {
     deleteFavourites();
     deleteAllFavouritesData();
   };
+
+  useEffect(() => {
+    if (currentFavouritesByIdData.length !== allFavouritesData?.length)
+      fetchFavourites();
+  }, [fetchFavourites, currentFavouritesByIdData, allFavouritesData]);
 
   return (
     <>
