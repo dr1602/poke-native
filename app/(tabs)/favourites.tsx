@@ -18,8 +18,6 @@ const favourites = () => {
     deleteAllFavouritesData();
   };
 
-  console.log('allFavouritesData', allFavouritesData);
-
   return (
     <>
       {!authData ? (

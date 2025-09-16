@@ -6,10 +6,9 @@ export const usePokemonCry = (cryUrl: string | undefined) => {
   const [pokemonCry, setPokemonCry] = useState<any>(null);
 
   const playPokeCry = async () => {
-    console.log('Cargando grito');
     setIsPokeCryLoading(true);
     if (!cryUrl) {
-      console.log('URL de grito no disponible');
+      console.error('URL de grito no disponible');
       setIsPokeCryLoading(false);
       return;
     }

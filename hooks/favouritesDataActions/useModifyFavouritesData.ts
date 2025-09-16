@@ -23,17 +23,15 @@ export const useModifyFavouritesLargerData = () => {
 
       const favourites: PokemonFinalExtendedData[] =
         await getFavouritePokemonsData();
-      console.log('favourites', favourites);
+
       const uniqueFavourites = removeDuplicates(favourites);
       const isPokemonSaved = uniqueFavourites.some(
         (fav) => fav.id === pokemonData.id
       );
 
-      console.log('isPokemonSaved', isPokemonSaved);
       if (!isPokemonSaved) {
         // si no existe el pokemon en el array, lo añade
         await addFavouritePokemonData(pokemonData);
-        console.log('se ejecuta');
       } else {
         // si ya existe el pokemon en el array, lo elimina
         await deleteSingleFavouritePokemonData(pokemonData);

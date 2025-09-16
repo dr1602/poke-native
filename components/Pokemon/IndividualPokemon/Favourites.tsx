@@ -23,8 +23,6 @@ export const Favourites = () => {
   const { isLoadingModifyFavourites, modifyFavourites } = useModifyFavourites();
   const { modifyFavouritesLargerData } = useModifyFavouritesLargerData();
 
-  console.log('pokemonData', pokemonData);
-
   const handleModifyFavourites = async () => {
     if (!pokemonData) return;
 
