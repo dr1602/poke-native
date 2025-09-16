@@ -9,7 +9,7 @@ const PokemonCard: React.FC<PokemonFinalData> = ({ ...PokemonFinalData }) => {
   const router = useRouter();
 
   const PokemonColour: string = getColourByPokemonType(
-    String(PokemonFinalData.types)
+    String(PokemonFinalData.types[0])
   );
   const bgStyles = { backgroundColor: PokemonColour, ...styles.Background };
 
