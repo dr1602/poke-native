@@ -32,7 +32,9 @@ export const useLoadSinglePokemon = (id: string) => {
         const response: PokemonExtendedData = await getPokemonDetailsById(
           pokemonId
         );
+
         let pokemonsArray: PokemonFinalExtendedData = {
+          number: pokemonId,
           id: response.id,
           name: response.name,
           types: response.types.map((typeInfo) => typeInfo.type.name),

@@ -9,8 +9,6 @@ export const UserData = () => {
   const authData = useAuthStore((state) => state.currentAuthData);
   const { currentFavouritesByIdData } = useFavouritesByIdStore();
 
-  console.log('currentFavouritesByIdData', currentFavouritesByIdData.length);
-
   const qtyOfFavourites = currentFavouritesByIdData.length;
 
   const logout = () => {
