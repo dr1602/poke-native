@@ -35,7 +35,7 @@ export const useLoadPokemons = () => {
           number: !!numberId ? numberId : '',
           id: pokemonDetails.id,
           name: pokemonDetails.name,
-          types: pokemonDetails.types[0].type.name,
+          types: pokemonDetails.types.map((typeInfo) => typeInfo.type.name),
           order: pokemonDetails.order,
           image:
             pokemonDetails.sprites.other['home'].front_default || undefined,

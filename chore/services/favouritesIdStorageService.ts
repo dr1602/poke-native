@@ -1,13 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { FAVOURITE_STORAGE_KEY } from '@/utils/constants/favouriteStorageConstants';
+import { FAVOURITE_STORAGE_ID_KEY } from '@/utils/constants/favouriteStorageConstants';
 
-export const addFavouritePokemon = async (pokemonId: number | undefined) => {
+export const addFavouritePokemonId = async (pokemonId: number | undefined) => {
   try {
-    const favouritePokemons = [...(await getFavouritePokemons())];
+    const favouritePokemons = [...(await getFavouritePokemonsId())];
     favouritePokemons.push(pokemonId);
     await AsyncStorage.setItem(
-      FAVOURITE_STORAGE_KEY,
+      FAVOURITE_STORAGE_ID_KEY,
       JSON.stringify(favouritePokemons)
     );
   } catch (error) {
@@ -15,10 +15,10 @@ export const addFavouritePokemon = async (pokemonId: number | undefined) => {
   }
 };
 
-export const getFavouritePokemons = async () => {
+export const getFavouritePokemonsId = async () => {
   try {
     const responseFavourites = await AsyncStorage.getItem(
-      FAVOURITE_STORAGE_KEY
+      FAVOURITE_STORAGE_ID_KEY
     );
     return responseFavourites ? JSON.parse(responseFavourites) : [];
   } catch (error) {
@@ -26,10 +26,10 @@ export const getFavouritePokemons = async () => {
   }
 };
 
-export const deleteSingleFavouritePokemon = async (pokemonId: number) => {
+export const deleteSingleFavouritePokemonId = async (pokemonId: number) => {
   try {
     const responseFavourites = await AsyncStorage.getItem(
-      FAVOURITE_STORAGE_KEY
+      FAVOURITE_STORAGE_ID_KEY
     );
     if (responseFavourites) {
       const favouritesPokemons = JSON.parse(responseFavourites) as number[];
@@ -37,7 +37,7 @@ export const deleteSingleFavouritePokemon = async (pokemonId: number) => {
         (id) => id !== pokemonId
       );
       await AsyncStorage.setItem(
-        FAVOURITE_STORAGE_KEY,
+        FAVOURITE_STORAGE_ID_KEY,
         JSON.stringify(filteredFavourites)
       );
     }
@@ -50,7 +50,7 @@ export const deleteAllFavouritePokemons = async () => {
   try {
     const favouritePokemons: number[] = [];
     await AsyncStorage.setItem(
-      FAVOURITE_STORAGE_KEY,
+      FAVOURITE_STORAGE_ID_KEY,
       JSON.stringify(favouritePokemons)
     );
   } catch (error) {

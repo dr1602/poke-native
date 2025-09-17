@@ -5,6 +5,7 @@ import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
 
 import { useFetchFavourites } from '@/hooks/favouritesActions/useFetchFavourites';
 import { useModifyFavourites } from '@/hooks/favouritesActions/useModifyFavourites';
+import { useModifyFavouritesLargerData } from '@/hooks/favouritesDataActions/useModifyFavouritesData';
 import { usePokemonDetailStore } from '@/store/pokemonDetailStore';
 import { HeartIconEnum } from '@/utils/constants/iconConstants';
 import { HeartIcon } from '@/utils/types/Icons';
@@ -18,10 +19,16 @@ export const Favourites = () => {
 
   const { isPokemonSaved, isLoadingFetchFavourites, fetchFavourites } =
     useFetchFavourites(pokemonData?.id);
+
   const { isLoadingModifyFavourites, modifyFavourites } = useModifyFavourites();
+  const { modifyFavouritesLargerData } = useModifyFavouritesLargerData();
 
   const handleModifyFavourites = async () => {
+    if (!pokemonData) return;
+
     await modifyFavourites(pokemonData?.id);
+    await modifyFavouritesLargerData(pokemonData);
+
     fetchFavourites();
   };
 
