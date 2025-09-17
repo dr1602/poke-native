@@ -6,7 +6,7 @@ const pokeImage: string = '../../assets/images/pokeball.png';
 
 export default function TabLayout() {
   return (
-    <Tabs>
+    <Tabs >
       <Tabs.Screen
         name='index'
         // estas options quitan a index del tab navigator

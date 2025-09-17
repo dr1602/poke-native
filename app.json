@@ -12,9 +12,10 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "mx.drs.pokeapp",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#000"
       },
       "edgeToEdgeEnabled": true
     },
