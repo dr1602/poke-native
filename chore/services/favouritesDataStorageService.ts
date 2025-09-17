@@ -42,8 +42,9 @@ export const deleteSingleFavouritePokemonData = async (
       const favouritesPokemons = JSON.parse(
         responseFavourites
       ) as PokemonFinalExtendedData[];
+
       const filteredFavourites = favouritesPokemons.filter(
-        (id) => id !== pokemonData
+        (favPokemon) => favPokemon.id !== pokemonData.id
       );
       await AsyncStorage.setItem(
         FAVOURITE_STORAGE_DATA_KEY,
