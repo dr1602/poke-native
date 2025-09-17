@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { When } from 'react-if';
 import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
+import { NotLogged } from '@/components/Generic/NotLogged';
 import { PokemonList } from '@/components/Pokemon/PokemonList';
 import { useDeleteAllFavourites } from '@/hooks/favouritesActions/useDeleteAllFavourites';
 import { useDeleteAllFavouritesData } from '@/hooks/favouritesDataActions/useDeleteAllFavouritesData';
@@ -40,10 +41,8 @@ const favourites = () => {
   return (
     <>
       <When condition={!authData}>
-        <View>
-          <Text style={styles.TextColor}>
-            You must be logged to see your favourites!
-          </Text>
+        <View style={styles.Container}>
+          <NotLogged />
         </View>
       </When>
       <When condition={allFavouritesData?.length === 0 && !!authData}>
@@ -69,6 +68,10 @@ const favourites = () => {
 };
 
 const styles = StyleSheet.create({
+  Container: {
+    flex: 1,
+    height: '100%',
+  },
   TextColor: {
     color: 'white',
   },
