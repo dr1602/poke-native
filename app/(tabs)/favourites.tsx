@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { When } from 'react-if';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 import { PokemonList } from '@/components/Pokemon/PokemonList';
 import { useDeleteAllFavourites } from '@/hooks/favouritesActions/useDeleteAllFavourites';
@@ -19,24 +19,23 @@ const favourites = () => {
   const deleteAction = () => {
     deleteFavourites();
     deleteAllFavouritesData();
+
+    fetchFavourites();
   };
 
   useEffect(() => {
     if (
       allFavouritesData?.length !== currentFavouritesByIdData.length &&
-      !authData
+      !!authData
     ) {
       fetchFavourites();
     }
   }, [
-    fetchFavourites,
-    currentFavouritesByIdData,
+    currentFavouritesByIdData.length,
     allFavouritesData?.length,
     authData,
+    fetchFavourites,
   ]);
-
-  console.log(allFavouritesData);
-  console.log(currentFavouritesByIdData);
 
   return (
     <>
@@ -51,19 +50,19 @@ const favourites = () => {
         <Text style={styles.TextColor}>No hay favoritos!</Text>
       </When>
       {!!allFavouritesData && allFavouritesData?.length > 0 && !!authData && (
-        <View>
+        <SafeAreaView style={{ flex: 1 }}>
           <View style={styles.ButtonContainer}>
             <Button title='Delete all' onPress={deleteAction} />
           </View>
 
-          <View style={styles.PokemonsContainer}>
+          <View style={{ flex: 1, ...styles.PokemonsContainer }}>
             <PokemonList
               pokemons={allFavouritesData}
               onLoad={() => {}}
               isThereNext={''}
             />
           </View>
-        </View>
+        </SafeAreaView>
       )}
     </>
   );
@@ -78,7 +77,7 @@ const styles = StyleSheet.create({
   },
   ButtonContainer: {
     paddingHorizontal: '9%',
-    paddingVertical: 12,
+    paddingBottom: 12,
     width: '102%',
   },
 });
