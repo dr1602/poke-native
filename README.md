@@ -48,3 +48,165 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## Docker Image
+
+Para crear la Dockerimage:
+
+```sh
+docker build -t poke-app .
+```
+
+Para asignar una tag especifica al Dockerimage
+
+```sh
+docker build -t poke-app:1.5 .
+```
+
+Asegurate de que no sea el mismo nombre, si por alguna razón quiere tener dos contenedores de un mismo repo
+
+Para ver imagenes
+
+```sh
+docker images
+```
+
+Para ver contenedores
+
+```sh
+docker ps
+```
+
+Para ver contenedores
+
+```sh
+docker ps
+```
+
+Para correr imagen en ambiente interactivo, eliminar imagen anterior corriendo, que se ejecute en segundo plano y que corra la imagen
+
+```sh
+docker run -it --rm -d poke-app
+```
+
+Corre por default en el puero 8081
+
+====
+
+Para buscar una imagen especifica
+
+```sh
+docker images poke-app
+```
+
+Para filtrar imagenes
+
+```sh
+docker images --filter=reference='*:1.0'
+```
+
+Para filtrar imagenes
+
+```sh
+docker images --no-runc
+```
+
+Para definir el puerto:
+
+```sh
+docker run -it --rm -d -p 8080:80 poke-app
+```
+
+Para ver los contenedores en ejecucion:
+
+```sh
+docker ps
+```
+
+Muestra todos lo contenedores
+
+```sh
+docker ps -a
+```
+
+Muestra el tamaño del contenedor
+
+```sh
+docker ps -size
+```
+
+Detiene el contenedores
+
+```sh
+docker stop <id-contenedor>
+```
+
+Te da las estadísticas de los contenedores
+
+```sh
+docker stats
+```
+
+Para generar json con mas data de la imagen o volumen (me parece)
+
+```sh
+docker inspect
+```
+
+Para explorar las redes de docker, el comando network en general gestiona las redes de docker
+
+```sh
+docker network ls
+```
+
+Para crear un red en docker, puede servir para conectar contenedores de forma especifica, mejorando la seguridad
+
+```sh
+docker network create <name>
+```
+
+Para obtener json para inspeccionar imagen
+
+```sh
+docker inspect <tag>
+```
+
+Para generar archivo comprimido a partir de una imagen de docker
+
+```sh
+docker save <repository-name> > <given-file-name>.rar
+```
+
+Para correr imagen de docker de imagen comprimida:
+
+```sh
+docker load --input <given-file-name>.rar
+```
+
+## Como desplegar tu contenedoren internet a través de DOcker Hub
+
+Loggearse
+
+```sh
+docker login
+```
+
+Crear un tag para mi docker image (una vez en el directorio del proyecto)
+
+```sh
+docker build -t <username>/<nombreimagen>:<version> .
+```
+
+Para empujar la imagen a docker hub
+
+```sh
+docker push <username>/<nombreimagen>:<version>
+```
+
+Para importar una imagen desde docker hub
+
+```sh
+docker run --name <desired-name> --rm -it -p 8080:80 <username>/<nombreimagen>:<version>
+```
+
+## NOTA: Docker Compose
