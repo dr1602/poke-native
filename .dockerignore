@@ -1,0 +1,13 @@
+# Directorios de dependencias
+node_modules
+npm-debug.log
+
+# Directorios de build
+build
+dist
+.vscode
+.env
+
+# Archivos de Git
+.git
+.gitignore
